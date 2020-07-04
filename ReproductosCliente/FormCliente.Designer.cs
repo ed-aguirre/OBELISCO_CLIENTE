@@ -37,8 +37,8 @@
             this.lblMatricula = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.lblApellidos = new System.Windows.Forms.Label();
             this.lblSaldo = new System.Windows.Forms.Label();
+            this.lblApellidos = new System.Windows.Forms.Label();
             this.lblCarrera = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -120,6 +120,7 @@
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Controls.Add(this.panel1);
             this.panel2.Controls.Add(this.label1);
@@ -134,6 +135,15 @@
             this.panel2.Size = new System.Drawing.Size(555, 273);
             this.panel2.TabIndex = 3;
             // 
+            // lblSaldo
+            // 
+            this.lblSaldo.AutoSize = true;
+            this.lblSaldo.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSaldo.Location = new System.Drawing.Point(366, 78);
+            this.lblSaldo.Name = "lblSaldo";
+            this.lblSaldo.Size = new System.Drawing.Size(0, 23);
+            this.lblSaldo.TabIndex = 1;
+            // 
             // lblApellidos
             // 
             this.lblApellidos.AutoSize = true;
@@ -143,15 +153,6 @@
             this.lblApellidos.Size = new System.Drawing.Size(134, 18);
             this.lblApellidos.TabIndex = 1;
             this.lblApellidos.Text = "Aguirre fuentes";
-            // 
-            // lblSaldo
-            // 
-            this.lblSaldo.AutoSize = true;
-            this.lblSaldo.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSaldo.Location = new System.Drawing.Point(366, 78);
-            this.lblSaldo.Name = "lblSaldo";
-            this.lblSaldo.Size = new System.Drawing.Size(0, 23);
-            this.lblSaldo.TabIndex = 1;
             // 
             // lblCarrera
             // 
@@ -166,10 +167,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(609, 370);
             this.Controls.Add(this.panel2);
             this.Name = "FormCliente";
             this.Text = "FormCliente";
+            this.Load += new System.EventHandler(this.FormCliente_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

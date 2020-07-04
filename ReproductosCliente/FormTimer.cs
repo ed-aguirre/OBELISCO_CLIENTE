@@ -19,8 +19,9 @@ namespace ReproductosCliente
         public FormTimer(int tipo)
         {
             InitializeComponent();
-            FormBorderStyle = FormBorderStyle.None;
+            //FormBorderStyle = FormBorderStyle.FixedToolWindow; // este es una ventanita pero se puede cerrar
             TopMost = true;
+            this.ControlBox = false;
             inicio(tipo);// si es tipo 1, se iniciara con 3 horas, else seran 3 minutos
 
         }
@@ -82,7 +83,7 @@ namespace ReproductosCliente
 
         private void tiempoAgotado(int tipoInicio)
         {
-            Class1 cl = new Class1();
+            Logica cl = new Logica();
             if(tipoInicio == 0) // el tiempo rapido, entonces tendrá que salir del programa
             {
                 cl.manipularForm(0); //se maximiza el form y lo bloquea.
@@ -120,7 +121,7 @@ namespace ReproductosCliente
 
         private void forzarCerrarSesion()
         {
-            Form1.ActiveForm.Focus(); //hace focus al form principal
+            FormPrincipal.ActiveForm.Focus(); //hace focus al form principal
             for (int i = 0; i < 4; i++)//hace cuatro tabs para llegar al boton de cerrar sesión
             {
                 SendKeys.Send("{TAB}");
@@ -130,14 +131,14 @@ namespace ReproductosCliente
             //hace dos enter para confirmar o, mas bien, forzar el cierre de sesión
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void FormTimer_FormClosing(object sender, FormClosingEventArgs e)
         {
             tmr.Enabled = false;
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

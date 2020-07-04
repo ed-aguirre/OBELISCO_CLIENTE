@@ -19,7 +19,7 @@ namespace ReproductosCliente
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Class1 cl = new Class1();
+            Logica cl = new Logica();
             if (cl.verificarForm() == true)  //verifica si existe el FormTimer abierto
             {
                 cl.alertaTimerOpen();// alertar que ya esta abierto

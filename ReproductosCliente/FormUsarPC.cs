@@ -25,7 +25,7 @@ namespace ReproductosCliente
 
         private void btnAceptarUsar_Click(object sender, EventArgs e)
         {
-            Class1 cl = new Class1();
+            Logica cl = new Logica();
             if (cl.verificarForm() == true)  //verifica si existe el FormTimer abierto
             {
                 cl.alertaTimerOpen();// alertar que ya esta abierto
@@ -36,6 +36,16 @@ namespace ReproductosCliente
                 cl.manipularForm(1);// se minimizaTodo
                 cl.abrirTimer(1); //se inicia el timer
             }
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
 
         }
     }

@@ -35,5 +35,10 @@ namespace ReproductosCliente
         {
             //inservibleeeee
         }
+
+        private void FormCliente_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

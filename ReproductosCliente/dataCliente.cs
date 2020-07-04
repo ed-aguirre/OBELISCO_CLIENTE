@@ -9,11 +9,11 @@ namespace ReproductosCliente
 
     class dataCliente
     {
-        public String _name;
-        public String _apellido;
-        public String _carrera;
-        public String _matricula;
-        public double _saldo;
+        public String nombre;
+        public String apellido;
+        public String carrera;
+        public String matricula;
+        public double saldo;
         public dataCliente()
         {
             Console.WriteLine("Datacliente iniciada");
@@ -32,47 +32,47 @@ namespace ReproductosCliente
 
         public String getName()
         {
-            return _name;
+            return nombre;
         }
         public void setName()
         {
-            _name = "Luis Eduardo";
+            nombre = "Luis Eduardo";
         }
 
         public String getApellido()
         {
-            return _apellido;
+            return apellido;
         }
         public void setApellido()
         {
-            _apellido = "Aguirre Fuentes";
+            apellido = "Aguirre Fuentes";
         }
 
         public String getCarrera()
         {
-            return _carrera;
+            return carrera;
         }
         public void setCarrera()
         {
-            _carrera = "LIS";
+            carrera = "LIS";
         }
 
         public String getMatricula()
         {
-            return _matricula;
+            return matricula;
         }
         public void setMatricula()
         {
-            _matricula = "ZS17016273";
+            matricula = "ZS17016273";
         }
 
         public double getSaldo()
         {
-            return _saldo;
+            return saldo;
         }
         public void setSaldo()
         {
-            _saldo = 13.50;
+            saldo = 13.50;
         }
 
     }

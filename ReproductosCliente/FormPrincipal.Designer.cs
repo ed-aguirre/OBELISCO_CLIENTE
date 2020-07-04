@@ -1,6 +1,6 @@
 ﻿namespace ReproductosCliente
 {
-    partial class Form1
+    partial class FormPrincipal
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPrincipal));
             this.panel1 = new System.Windows.Forms.Panel();
             this.subPanel2 = new System.Windows.Forms.Panel();
             this.btnLogin = new System.Windows.Forms.Button();
             this.btnRegistrar = new System.Windows.Forms.Button();
             this.subPanel1 = new System.Windows.Forms.Panel();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnPerfil = new System.Windows.Forms.Button();
             this.btnCerrarSesion = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnUsarRap = new System.Windows.Forms.Button();
+            this.btnUsarCompu = new System.Windows.Forms.Button();
             this.panelBase = new System.Windows.Forms.Panel();
             this.btnBack = new System.Windows.Forms.Button();
             this.panelChildForm = new System.Windows.Forms.Panel();
@@ -79,7 +79,7 @@
             this.subPanel2.Controls.Add(this.btnLogin);
             this.subPanel2.Controls.Add(this.btnRegistrar);
             this.subPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.subPanel2.Location = new System.Drawing.Point(0, 436);
+            this.subPanel2.Location = new System.Drawing.Point(0, 484);
             this.subPanel2.Name = "subPanel2";
             this.subPanel2.Size = new System.Drawing.Size(193, 163);
             this.subPanel2.TabIndex = 4;
@@ -120,36 +120,39 @@
             // subPanel1
             // 
             this.subPanel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.subPanel1.Controls.Add(this.button4);
+            this.subPanel1.Controls.Add(this.btnPerfil);
             this.subPanel1.Controls.Add(this.btnCerrarSesion);
-            this.subPanel1.Controls.Add(this.button2);
-            this.subPanel1.Controls.Add(this.button1);
+            this.subPanel1.Controls.Add(this.btnUsarRap);
+            this.subPanel1.Controls.Add(this.btnUsarCompu);
             this.subPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.subPanel1.Location = new System.Drawing.Point(0, 216);
+            this.subPanel1.Location = new System.Drawing.Point(0, 264);
             this.subPanel1.Name = "subPanel1";
             this.subPanel1.Size = new System.Drawing.Size(193, 220);
             this.subPanel1.TabIndex = 3;
             // 
-            // button4
+            // btnPerfil
             // 
-            this.button4.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.button4.BackColor = System.Drawing.Color.LimeGreen;
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.Color.White;
-            this.button4.Location = new System.Drawing.Point(0, 3);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(193, 51);
-            this.button4.TabIndex = 1;
-            this.button4.Text = "Perfil";
-            this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.btnPerfil.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPerfil.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnPerfil.FlatAppearance.BorderSize = 0;
+            this.btnPerfil.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPerfil.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPerfil.ForeColor = System.Drawing.Color.White;
+            this.btnPerfil.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.btnPerfil.Location = new System.Drawing.Point(0, 3);
+            this.btnPerfil.Name = "btnPerfil";
+            this.btnPerfil.Size = new System.Drawing.Size(193, 51);
+            this.btnPerfil.TabIndex = 1;
+            this.btnPerfil.Text = "Perfil";
+            this.btnPerfil.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPerfil.UseVisualStyleBackColor = false;
+            this.btnPerfil.Click += new System.EventHandler(this.button4_Click);
             // 
             // btnCerrarSesion
             // 
-            this.btnCerrarSesion.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnCerrarSesion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCerrarSesion.BackColor = System.Drawing.Color.Salmon;
             this.btnCerrarSesion.FlatAppearance.BorderSize = 0;
             this.btnCerrarSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -160,43 +163,45 @@
             this.btnCerrarSesion.Size = new System.Drawing.Size(193, 51);
             this.btnCerrarSesion.TabIndex = 4;
             this.btnCerrarSesion.Text = "Cerrar Sesión";
-            this.btnCerrarSesion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCerrarSesion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCerrarSesion.UseVisualStyleBackColor = false;
             this.btnCerrarSesion.Click += new System.EventHandler(this.button3_Click);
             // 
-            // button2
+            // btnUsarRap
             // 
-            this.button2.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.button2.BackColor = System.Drawing.Color.White;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(0, 105);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(193, 51);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Uso rápido";
-            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            this.btnUsarRap.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUsarRap.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnUsarRap.FlatAppearance.BorderSize = 0;
+            this.btnUsarRap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUsarRap.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUsarRap.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnUsarRap.Location = new System.Drawing.Point(0, 105);
+            this.btnUsarRap.Name = "btnUsarRap";
+            this.btnUsarRap.Size = new System.Drawing.Size(193, 51);
+            this.btnUsarRap.TabIndex = 3;
+            this.btnUsarRap.Text = "Uso rápido";
+            this.btnUsarRap.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnUsarRap.UseVisualStyleBackColor = false;
+            this.btnUsarRap.Click += new System.EventHandler(this.button2_Click_1);
             // 
-            // button1
+            // btnUsarCompu
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.button1.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button1.Location = new System.Drawing.Point(0, 54);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(193, 51);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Usar computadora";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnUsarCompu.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUsarCompu.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnUsarCompu.FlatAppearance.BorderSize = 0;
+            this.btnUsarCompu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUsarCompu.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUsarCompu.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnUsarCompu.Location = new System.Drawing.Point(0, 54);
+            this.btnUsarCompu.Name = "btnUsarCompu";
+            this.btnUsarCompu.Size = new System.Drawing.Size(193, 51);
+            this.btnUsarCompu.TabIndex = 2;
+            this.btnUsarCompu.Text = "Usar computadora";
+            this.btnUsarCompu.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnUsarCompu.UseVisualStyleBackColor = false;
+            this.btnUsarCompu.Click += new System.EventHandler(this.button1_Click);
             // 
             // panelBase
             // 
@@ -205,7 +210,7 @@
             this.panelBase.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelBase.Location = new System.Drawing.Point(0, 0);
             this.panelBase.Name = "panelBase";
-            this.panelBase.Size = new System.Drawing.Size(193, 216);
+            this.panelBase.Size = new System.Drawing.Size(193, 264);
             this.panelBase.TabIndex = 2;
             this.panelBase.Paint += new System.Windows.Forms.PaintEventHandler(this.panelBase_Paint);
             // 
@@ -229,7 +234,7 @@
             this.panelChildForm.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelChildForm.BackColor = System.Drawing.SystemColors.Control;
+            this.panelChildForm.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.panelChildForm.Controls.Add(this.pictureBox1);
             this.panelChildForm.Location = new System.Drawing.Point(210, 0);
             this.panelChildForm.Name = "panelChildForm";
@@ -240,9 +245,9 @@
             // 
             this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(198, 135);
+            this.pictureBox1.Location = new System.Drawing.Point(125, 78);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(240, 234);
+            this.pictureBox1.Size = new System.Drawing.Size(350, 303);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -264,6 +269,7 @@
             // 
             // panel6
             // 
+            this.panel6.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.panel6.Controls.Add(this.btnIngresar);
             this.panel6.Controls.Add(this.btnRegistrarAccion);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
@@ -304,6 +310,7 @@
             // 
             // panel5
             // 
+            this.panel5.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel5.Location = new System.Drawing.Point(0, 1);
             this.panel5.Name = "panel5";
@@ -312,11 +319,13 @@
             // 
             // panel4
             // 
+            this.panel4.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel4.Location = new System.Drawing.Point(595, 1);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(30, 71);
             this.panel4.TabIndex = 3;
+            this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
             // 
             // panel3
             // 
@@ -326,7 +335,7 @@
             this.panel3.Size = new System.Drawing.Size(625, 1);
             this.panel3.TabIndex = 2;
             // 
-            // Form1
+            // FormPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -337,7 +346,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MinimumSize = new System.Drawing.Size(851, 538);
-            this.Name = "Form1";
+            this.Name = "FormPrincipal";
             this.Text = "Form1";
             this.panel1.ResumeLayout(false);
             this.subPanel2.ResumeLayout(false);
@@ -362,8 +371,8 @@
         private System.Windows.Forms.Panel panelBase;
         private System.Windows.Forms.Panel subPanel1;
         private System.Windows.Forms.Button btnCerrarSesion;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnUsarRap;
+        private System.Windows.Forms.Button btnUsarCompu;
         private System.Windows.Forms.Panel subPanel2;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnRegistrarAccion;
@@ -371,7 +380,7 @@
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnPerfil;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Button btnBack;
     }

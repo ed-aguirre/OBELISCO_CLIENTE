@@ -31,13 +31,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.inputNombre = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.inputApellidos = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.inputMatricula = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboPrograma = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.inputContra = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -72,18 +72,19 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Apellidos";
             // 
-            // textBox1
+            // inputApellidos
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.inputApellidos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Font = new System.Drawing.Font("Verdana", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(304, 83);
-            this.textBox1.MaxLength = 30;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(261, 29);
-            this.textBox1.TabIndex = 2;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.inputApellidos.Font = new System.Drawing.Font("Verdana", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inputApellidos.ForeColor = System.Drawing.SystemColors.MenuText;
+            this.inputApellidos.Location = new System.Drawing.Point(304, 83);
+            this.inputApellidos.MaxLength = 30;
+            this.inputApellidos.Name = "inputApellidos";
+            this.inputApellidos.Size = new System.Drawing.Size(261, 29);
+            this.inputApellidos.TabIndex = 2;
+            this.inputApellidos.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label3
             // 
@@ -91,21 +92,21 @@
             this.label3.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(32, 127);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(97, 23);
+            this.label3.Size = new System.Drawing.Size(240, 23);
             this.label3.TabIndex = 0;
-            this.label3.Text = "Matricula";
+            this.label3.Text = "Matricula/N° Academico";
             // 
-            // textBox2
+            // inputMatricula
             // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.inputMatricula.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.Font = new System.Drawing.Font("Verdana", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(36, 153);
-            this.textBox2.MaxLength = 20;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(529, 29);
-            this.textBox2.TabIndex = 3;
+            this.inputMatricula.Font = new System.Drawing.Font("Verdana", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inputMatricula.Location = new System.Drawing.Point(36, 153);
+            this.inputMatricula.MaxLength = 20;
+            this.inputMatricula.Name = "inputMatricula";
+            this.inputMatricula.Size = new System.Drawing.Size(529, 29);
+            this.inputMatricula.TabIndex = 3;
             // 
             // label4
             // 
@@ -118,27 +119,20 @@
             this.label4.Text = "Programa Educativo";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
-            // comboBox1
+            // comboPrograma
             // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.comboPrograma.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.BackColor = System.Drawing.SystemColors.Window;
-            this.comboBox1.Font = new System.Drawing.Font("Verdana", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "LIS ",
-            "LGN",
-            "MEDICINA",
-            "QUIMICA ",
-            "ELECTRICA",
-            "MECANICA",
-            "ARTES"});
-            this.comboBox1.Location = new System.Drawing.Point(36, 224);
-            this.comboBox1.MaxDropDownItems = 15;
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(529, 28);
-            this.comboBox1.TabIndex = 4;
+            this.comboPrograma.BackColor = System.Drawing.SystemColors.Window;
+            this.comboPrograma.Font = new System.Drawing.Font("Verdana", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboPrograma.FormattingEnabled = true;
+            this.comboPrograma.Location = new System.Drawing.Point(36, 224);
+            this.comboPrograma.MaxDropDownItems = 15;
+            this.comboPrograma.Name = "comboPrograma";
+            this.comboPrograma.Size = new System.Drawing.Size(529, 28);
+            this.comboPrograma.TabIndex = 4;
+            this.comboPrograma.SelectedValueChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -151,28 +145,29 @@
             this.label5.Text = "Contraseña";
             this.label5.Click += new System.EventHandler(this.label4_Click);
             // 
-            // textBox3
+            // inputContra
             // 
-            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.inputContra.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox3.Font = new System.Drawing.Font("Verdana", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(36, 295);
-            this.textBox3.MaxLength = 50;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(529, 29);
-            this.textBox3.TabIndex = 5;
-            this.textBox3.UseSystemPasswordChar = true;
+            this.inputContra.Font = new System.Drawing.Font("Verdana", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inputContra.Location = new System.Drawing.Point(36, 295);
+            this.inputContra.MaxLength = 50;
+            this.inputContra.Name = "inputContra";
+            this.inputContra.Size = new System.Drawing.Size(529, 29);
+            this.inputContra.TabIndex = 5;
+            this.inputContra.UseSystemPasswordChar = true;
             // 
             // FormRegistro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(609, 370);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.comboPrograma);
+            this.Controls.Add(this.inputApellidos);
+            this.Controls.Add(this.inputContra);
+            this.Controls.Add(this.inputMatricula);
             this.Controls.Add(this.inputNombre);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label5);
@@ -191,12 +186,12 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox inputNombre;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox inputApellidos;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox inputMatricula;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboPrograma;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox inputContra;
     }
 }

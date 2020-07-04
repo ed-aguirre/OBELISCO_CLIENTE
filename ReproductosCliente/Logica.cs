@@ -3,10 +3,10 @@ using System.Windows.Forms;
 
 namespace ReproductosCliente
 {
-    class Class1 : Form1
+    class Logica : FormPrincipal
     {
         
-        public Class1()
+        public Logica()
         {
             Console.WriteLine("Clase uno inicidaa");
         }
@@ -34,7 +34,8 @@ namespace ReproductosCliente
 
         }
 
-        public int alerta(int tipo) //hay tipos de alertas (1= alerta de cerraSesion, 2= alerta de tiempo)
+        public int alerta(int tipo) 
+            //hay tipos de alertas (1= alerta de cerraSesion, 2= alerta de tiempo)
         {
             String titulo = "";
             String texto = "";

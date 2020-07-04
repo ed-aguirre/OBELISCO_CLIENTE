@@ -109,11 +109,12 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormTimer";
-            this.Opacity = 0.7D;
+            this.Opacity = 0.77D;
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "FormTimer";
+            this.Text = "Cronometro";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormTimer_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();

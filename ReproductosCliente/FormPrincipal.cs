@@ -5,20 +5,35 @@ using System.Windows.Forms;
 
 namespace ReproductosCliente
 {
-   
-    public partial class Form1 : Form
+    
+    public partial class FormPrincipal : Form
     {
-       
-        public Form1()
+        FormRegistro FormRegistro = new FormRegistro();
+        private ConectorBD _conectarBD = new ConectorBD();
+        private const int REGISTRO_EXITO = 1;
+        private const int REGISTRO_SIN_EXITO = 0;
+
+        private const int VISTA_ARRANQUE = 1;
+
+        public FormPrincipal()
         {
             InitializeComponent();
+            Colorear_panel();
             bloquearForm();
             customDesing(1);
+            
+        }
+        private void Colorear_panel() //pinta el panel lateral
+        {
+            panelBase.BackColor = ColorTranslator.FromHtml("#005baa");
+            subPanel1.BackColor = ColorTranslator.FromHtml("#005baa");
+            subPanel2.BackColor = ColorTranslator.FromHtml("#005baa");
+            panel1.BackColor = ColorTranslator.FromHtml("#005baa");
         }
 
         private void customDesing(int casoInicio)// inicia y setea los valores de los paneles principales
         {
-            if(casoInicio == 1)
+            if(casoInicio == VISTA_ARRANQUE)
             {
                 subPanel1.Visible = false;//Y VUELVE INVISIBLE EL PRIMER PANEL
                 btnIngresar.Visible = false;
@@ -74,18 +89,17 @@ namespace ReproductosCliente
             }
         }
 
-
         private void btnLogin_Click(object sender, EventArgs e)
         {
             FormLogin fl = new FormLogin();
             abrirChildForm(fl);//se crea el objeto formLogin y se pasa como parametro
             cambioBotones(1); //se envia un parametro uno, para indicar al metodo que es login
+
         }
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            FormRegistro fm2 = new FormRegistro();
-            abrirChildForm(fm2);//igual que el metodo anterior pero con el formRegistro
+            abrirChildForm(FormRegistro);//igual que el metodo anterior pero con el formRegistro
             cambioBotones(0);//se envia como parametro 0 para indicar al metodo que es el registro
         }
         private void btnIngresar_Click(object sender, EventArgs e) //este es el que manda datos al dataCliente
@@ -93,7 +107,8 @@ namespace ReproductosCliente
             FormCliente fm3 = new FormCliente();
             abrirChildForm(fm3); // se abre el form cliente
             customDesing(0); // se cambia a la vista para mostrar los botones del cliente
-
+            
+            //_conectarBD.Conectar();
              
         }
         private void btnBack_Click(object sender, EventArgs e)
@@ -149,7 +164,8 @@ namespace ReproductosCliente
             // no se di dejar esta funcion, pues en la class1 tambien se hace esto, hmm
             FormBorderStyle = FormBorderStyle.None;
             WindowState = FormWindowState.Maximized;
-            TopMost = true;
+            //TopMost = true;
+            //ESTA LINEA DE CODIGO ES IMPORTANTE, 
         }
 
         public void cerrarActiveFormYCerrarSesion()
@@ -165,7 +181,7 @@ namespace ReproductosCliente
 
         private void button3_Click(object sender, EventArgs e) //btnCerrarSesion
         {
-            Class1 cl = new Class1();
+            Logica cl = new Logica();
             int respuesta = cl.alerta(1); //guarda el valor del dialog result(1 o 0)
             if( respuesta == 1) //si selecciona si, se cerrará todo los forms y saldra de la sesion
             {
@@ -185,9 +201,31 @@ namespace ReproductosCliente
             }
         }
 
-        private void btnRegistrarAccion_Click(object sender, EventArgs e)
+        private void btnRegistrarAccion_Click(object sender, EventArgs e)//boton RegistrarAccion
         {
-            new Class1().alerta(4); // se manda la alerta del registro
+            int respuesta = 0;
+            if(FormRegistro.validarCampos())//true = todo bien
+            {
+                FormRegistro.setCampos();
+                respuesta = FormRegistro.EnviarDatosUsuario();
+            }
+
+            if( respuesta == REGISTRO_EXITO)
+            {
+                new MyMessageBox().Show(REGISTRO_EXITO);
+                activeForm.Close();
+                customDesing( VISTA_ARRANQUE );
+            }
+            else
+            {
+                new MyMessageBox().Show(REGISTRO_SIN_EXITO);
+            }
+            
+        }
+
+        private void panel4_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

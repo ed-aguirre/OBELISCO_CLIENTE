@@ -12,12 +12,6 @@ namespace ReproductosCliente
 {
     public partial class FormLogin : Form
     {
-        public bool val;
-        public bool getVal
-        {
-            get { return val; }
-            set { val = true; }
-        }
         public FormLogin()
         {
             InitializeComponent();

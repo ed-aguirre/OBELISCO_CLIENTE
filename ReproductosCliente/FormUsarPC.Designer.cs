@@ -39,7 +39,7 @@
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(95, 83);
+            this.label1.Location = new System.Drawing.Point(123, 111);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(381, 23);
             this.label1.TabIndex = 0;
@@ -51,22 +51,24 @@
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(58, 132);
+            this.label2.Location = new System.Drawing.Point(58, 153);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(480, 23);
+            this.label2.Size = new System.Drawing.Size(599, 23);
             this.label2.TabIndex = 0;
-            this.label2.Text = "Se te cobrará $3 para usar el equipo por 2 horas";
+            this.label2.Text = "Se te cobrará $3 por usar el equipo. (Hasta máximo 2 horas)";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(158, 186);
+            this.label3.Location = new System.Drawing.Point(185, 214);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(195, 23);
             this.label3.TabIndex = 0;
             this.label3.Text = "¿Deseas continuar?";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // btnAceptarUsar
             // 
@@ -89,6 +91,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(609, 370);
             this.Controls.Add(this.btnAceptarUsar);
             this.Controls.Add(this.label3);

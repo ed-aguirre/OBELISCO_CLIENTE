@@ -18,7 +18,7 @@ namespace ReproductosCliente
         int idProgramaEducativo;
         float saldo;
         int estadoUsuario;
-        string fechaExp;
+        DateTime fechaExp;
 
         private const int ID_CONSUMIDOR = 1;
         private const int ID_NO_VALIDADO = 1;
@@ -45,7 +45,7 @@ namespace ReproductosCliente
             return estadoUsuario;
         }
 
-        string IConsumidor.getFechaExpiracion()
+        DateTime IConsumidor.getFechaExpiracion()
         {
             return fechaExp;
         }
@@ -101,7 +101,7 @@ namespace ReproductosCliente
             this.estadoUsuario = ID_NO_VALIDADO;
         }
 
-        void IConsumidor.setFechaExpiracion(string fecha)
+        void IConsumidor.setFechaExpiracion(DateTime fecha)
         {
             this.fechaExp = fecha;
         }
@@ -158,6 +158,7 @@ namespace ReproductosCliente
                 Array.Reverse(anioFin);
                 string temp = new string(anioFin);
 
+                Console.WriteLine(temp);
                 int completo = (int.Parse("20" + temp)) + 6;
                 return completo.ToString() + "-07-30";
             }
@@ -185,7 +186,7 @@ namespace ReproductosCliente
             return nombreTipoUsuario;
         }
 
-        static string nombrarTipoEstado(int idEstadoUser)
+        public static string nombrarTipoEstado(int idEstadoUser)
         {
             string nombreEstadoUsuario = "";
             switch (idEstadoUser)
@@ -228,7 +229,7 @@ namespace ReproductosCliente
             if (mapa.ContainsKey("estadoUsuario"))
                 consumidor.setEstadoUsuario((int)mapa["estadoUsuario"]);
             if (mapa.ContainsKey("fechaExp"))
-                consumidor.setFechaExpiracion((string)mapa["fechaExp"]);
+                consumidor.setFechaExpiracion((DateTime)mapa["fechaExp"]);
 
             return consumidor;
         }
@@ -255,7 +256,7 @@ namespace ReproductosCliente
             if (consumidor.getEstadoUsuario() != 0)
                 mapa.Add("estadoUsuario", consumidor.getEstadoUsuario());
             if (consumidor.getFechaExpiracion() != null)
-                mapa.Add("fechaExp", consumidor.getFechaExpiracion());
+                mapa.Add("fechaExp", consumidor.getFechaExpiracion().ToString("yyyy-MM-dd"));
 
             return mapa;
         }

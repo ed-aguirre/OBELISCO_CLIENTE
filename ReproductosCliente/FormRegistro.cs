@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
@@ -16,11 +17,10 @@ namespace ReproductosCliente
     public partial class FormRegistro : Form
     {
         private IConsumidor consumidor = new Consumidor();
-        private string programaEducativo = null;
-        private string contra = "";
+        private string programaEducativo;
         string txtAlerta;
-        string[] apellidos;
 
+        private Regex regex = new Regex("^(ZS+[0-9]{8}$|^[0-9]{5,7}$)");
         private const int ID_EXISTENTE = 1;
         Dictionary<string, string> programas;
 
@@ -28,9 +28,12 @@ namespace ReproductosCliente
         {
             Console.WriteLine("REGISTRO");
             programas = new ConectorBD().getProgramas();
-            
             InitializeComponent();
+            
             comboPrograma.DataSource = programas.Values.ToArray();
+            inputApellidoPaterno.Text = "Apellido Paterno";
+            inputApellidoMaterno.Text = "Apellido Materno";
+
         }
         
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -60,11 +63,9 @@ namespace ReproductosCliente
             }
         }
 
+
         public Boolean validarCampos()
         {
-            
-            apellidos = inputApellidos.Text.Split(' ');
-
             if ( inputNombre.Text.Length <= 0)
             {
                 txtAlerta = "Ingresa tu nombre";
@@ -72,16 +73,25 @@ namespace ReproductosCliente
                 inputNombre.Focus();
                 return false;
             }
-            if( inputApellidos.Text.Length <= 0 || apellidos.Length < 2)
+            if( inputApellidoPaterno.Text.Length <= 0 || inputApellidoPaterno.Text == "Apellido Paterno")
             {
-                txtAlerta = "Ingresa tus dos apellidos separados por un espacio.";
+                txtAlerta = "Ingresa tu apellido paterno.";
                 new MyMessageBox().Show(txtAlerta);
-                inputApellidos.Focus();
+                inputApellidoPaterno.Focus();
                 return false;
             }
-            if( inputMatricula.Text.Length <= 0)
+            if (inputApellidoMaterno.Text.Length <= 0 || inputApellidoMaterno.Text == "Apellido Materno")
             {
-                txtAlerta = "Ingresa tu matricula o N° Personal Academico";
+                txtAlerta = "Ingresa tu apellido materno.";
+                new MyMessageBox().Show(txtAlerta);
+                inputApellidoMaterno.Focus();
+                return false;
+            }
+            if( !regex.IsMatch(inputMatricula.Text.ToUpper()))
+            {
+                txtAlerta = "Ingresa tu matricula o N° Personal Academico\n" +
+                    "Matricula Estudiante: Incluir la Z al principio.\n" +
+                    "N° Personal: Debe poseer entre 5 y 7 caracteres. ";
                 new MyMessageBox().Show(txtAlerta);
                 inputMatricula.Focus();
                 return false;
@@ -100,21 +110,22 @@ namespace ReproductosCliente
         {
             consumidor.setIdUsuario(inputMatricula.Text.ToUpper());
             consumidor.setClaveAcceso(inputContra.Text);
-            consumidor.setApellidoMaterno(apellidos[1].ToUpper());
-            consumidor.setApellidoPaterno(apellidos[0].ToUpper());
+            consumidor.setApellidoMaterno(inputApellidoMaterno.Text.ToUpper());
+            consumidor.setApellidoPaterno(inputApellidoPaterno.Text.ToUpper());
             consumidor.setNombre(inputNombre.Text.ToUpper());
             consumidor.setTipoUsuario();
             consumidor.setPrgmaEducativo(int.Parse(programaEducativo));
             consumidor.setSaldo();
             consumidor.setEstadoUsuario();
-            consumidor.setFechaExpiracion(Consumidor.calcularFecha(inputMatricula.Text.ToUpper()));
+            DateTime date = Convert.ToDateTime(Consumidor.calcularFecha(inputMatricula.Text.ToUpper()));
+            consumidor.setFechaExpiracion( date );
 
-            Console.WriteLine(consumidor.getString());
+            //Console.WriteLine(consumidor.getString());
         }
 
         public int EnviarDatosUsuario()
         {
-            int respuesta = new ConectorBD().existeMatricula(consumidor.getIdUsuario()));
+            int respuesta = new ConectorBD().existeMatricula(consumidor.getIdUsuario() );
             if ( respuesta == ID_EXISTENTE)
             {
                 txtAlerta = "La matricula ingresada ya existe.";
@@ -125,6 +136,50 @@ namespace ReproductosCliente
                 return new ConectorBD().registrarUsuario( Consumidor.toMap(consumidor) );
             }
             return 0;
+        }
+
+        private void inputApellidoPaterno_Click(object sender, EventArgs e)
+        {
+            if( inputApellidoPaterno.Text == "Apellido Paterno")
+            {
+                inputApellidoPaterno.Text = "";
+                inputApellidoPaterno.ForeColor = Color.Black;
+            }
+        }
+
+        private void inputApellidoPaterno_Leave(object sender, EventArgs e)
+        {
+            if(string.IsNullOrWhiteSpace(inputApellidoPaterno.Text))
+            {
+                inputApellidoPaterno.Text = "Apellido Paterno";
+                inputApellidoPaterno.ForeColor = Color.Silver;
+            }
+            else
+            {
+                inputApellidoPaterno.ForeColor = Color.Black;
+            }
+        }
+
+        private void inputApellidoMaterno_Click(object sender, EventArgs e)
+        {
+            if (inputApellidoMaterno.Text == "Apellido Materno")
+            {
+                inputApellidoMaterno.Text = "";
+                inputApellidoMaterno.ForeColor = Color.Black;
+            }
+        }
+
+        private void inputApellidoMaterno_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(inputApellidoMaterno.Text))
+            {
+                inputApellidoMaterno.Text = "Apellido Materno";
+                inputApellidoMaterno.ForeColor = Color.Silver;
+            }
+            else
+            {
+                inputApellidoMaterno.ForeColor = Color.Black;
+            }
         }
     }
 }

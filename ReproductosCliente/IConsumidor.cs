@@ -38,8 +38,8 @@ namespace ReproductosCliente
         void setEstadoUsuario(int estadoUser);
         int getEstadoUsuario();
 
-        void setFechaExpiracion(string fecha);
-        string getFechaExpiracion();
+        void setFechaExpiracion(DateTime fecha);
+        DateTime getFechaExpiracion();
 
         string getString();
     }

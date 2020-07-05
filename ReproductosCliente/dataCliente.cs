@@ -17,7 +17,7 @@ namespace ReproductosCliente
         public dataCliente()
         {
             Console.WriteLine("Datacliente iniciada");
-            settearTODO(); //ahora cada que se instancia la clase se settean todos los valores
+            //settearTODO(); //ahora cada que se instancia la clase se settean todos los valores
             //no es lo correcto pero funciona
         }
 

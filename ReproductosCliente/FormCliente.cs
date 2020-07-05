@@ -16,18 +16,11 @@ namespace ReproductosCliente
         {
             
             InitializeComponent();
-            getTODO();
-            Console.WriteLine( new dataCliente().getName() );
+            Console.WriteLine( "CLIENTE INICIADa" );
         }
 
         public void getTODO()
         {
-            dataCliente dc = new dataCliente();
-            lblNombre.Text = dc.getName();
-            lblApellidos.Text = dc.getApellido();
-            lblCarrera.Text = dc.getCarrera();
-            lblMatricula.Text = dc.getMatricula();
-            lblSaldo.Text = dc.getSaldo().ToString();
 
         }
 

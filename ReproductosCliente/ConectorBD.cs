@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +26,7 @@ namespace ReproductosCliente
 
         public ConectorBD()
         {
-            Console.WriteLine("Servicio de B A S E ");
+            Console.WriteLine("Servicio de DB ");
         }
         public void Header()
         {
@@ -39,25 +40,16 @@ namespace ReproductosCliente
         {
             Header();
             Dictionary<string, string> programas = new Dictionary<string, string>();
-            string sql = "SELECT* FROM programaeducativo";
+            string sql = "SELECT * FROM programaeducativo";
             try
-            {
-                
+            {   
                 MySqlDataReader reader = null;
                 MySqlCommand cmd = new MySqlCommand(sql, conexionBD);
                 conexionBD.Open();
 
                 reader = cmd.ExecuteReader();
-                /*int respuesta = cmd.ExecuteNonQuery();
-                if( respuesta > 0)
-                {
-                    //almenos un registro se debio de haber afectado
-                }*/
                 while (reader.HasRows)
                 {
-                    /*Console.WriteLine("\t{0}\t{1}", reader.GetName(0),
-                        reader.GetName(1));*/
-
                     while (reader.Read())
                     {
                         programas.Add( reader.GetString(0),
@@ -66,15 +58,13 @@ namespace ReproductosCliente
                     reader.NextResult();
                     
                 }
-
+                reader.Close();
             }
             catch(MySqlException ex)
             {
-                Console.WriteLine(ex.ToString());
+                MessageBox.Show(ex.ToString());
             }
-            Console.WriteLine(programas.Count);
             return programas;
-            
         }
 
         public int existeMatricula(string matricula)
@@ -96,12 +86,60 @@ namespace ReproductosCliente
                 {
                     respuesta = ID_USUARIO_EXISTE;
                 }
-
-            }catch(MySqlException ex)
+                reader.Close();
+            }
+            catch(MySqlException ex)
             {
-                Console.WriteLine(ex.ToString());
+                MessageBox.Show(ex.ToString());
             }
             return respuesta;
+        }
+
+        public Dictionary<string, Object> login(string matricula, string clave)
+        {
+            string txtAlerta;
+            Dictionary<string, Object> mapa = new Dictionary<string, Object>();
+
+            if (existeMatricula(matricula) == 1)
+            {
+                txtAlerta = "La matricula no coincide con la contraseña";
+            }
+            else
+            {
+                txtAlerta = "No se encontró ningun usuario con esa matricula.";
+                new MyMessageBox().Show(txtAlerta);
+                return mapa;
+            }
+
+            Header();
+            string sql = string.Format("SELECT * FROM usuario WHERE idUsuario = '{0}' AND claveAcceso = '{1}'", matricula, clave);
+
+            try
+            {
+                MySqlDataReader reader = null;
+                MySqlCommand cmd = new MySqlCommand(sql, conexionBD);
+                conexionBD.Open();
+
+                reader = cmd.ExecuteReader(); 
+                if( reader.HasRows)
+                {
+                    reader.Read();
+                    for (int i = 0; i < reader.FieldCount; i++)
+                    {
+                        mapa.Add(reader.GetName(i), reader.GetValue(i));
+                    }
+                }
+                else
+                {
+                    new MyMessageBox().Show(txtAlerta);
+                }
+                reader.Close();
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return mapa;
         }
 
         public int registrarUsuario(Dictionary<string, Object> mapa)
@@ -142,6 +180,7 @@ namespace ReproductosCliente
                 {
                     return respuesta;
                 }
+                
             }
             catch(MySqlException ex)
             {

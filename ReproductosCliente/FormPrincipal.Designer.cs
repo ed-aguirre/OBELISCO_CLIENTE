@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPrincipal));
             this.panel1 = new System.Windows.Forms.Panel();
             this.subPanel2 = new System.Windows.Forms.Panel();
-            this.btnLogin = new System.Windows.Forms.Button();
+            this.btnIniciarSesion = new System.Windows.Forms.Button();
             this.btnRegistrar = new System.Windows.Forms.Button();
             this.subPanel1 = new System.Windows.Forms.Panel();
             this.btnPerfil = new System.Windows.Forms.Button();
@@ -45,7 +45,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.btnIngresar = new System.Windows.Forms.Button();
-            this.btnRegistrarAccion = new System.Windows.Forms.Button();
+            this.btnRegistrarse = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -76,7 +76,7 @@
             // subPanel2
             // 
             this.subPanel2.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.subPanel2.Controls.Add(this.btnLogin);
+            this.subPanel2.Controls.Add(this.btnIniciarSesion);
             this.subPanel2.Controls.Add(this.btnRegistrar);
             this.subPanel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.subPanel2.Location = new System.Drawing.Point(0, 484);
@@ -84,21 +84,21 @@
             this.subPanel2.Size = new System.Drawing.Size(193, 163);
             this.subPanel2.TabIndex = 4;
             // 
-            // btnLogin
+            // btnIniciarSesion
             // 
-            this.btnLogin.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnLogin.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.btnLogin.FlatAppearance.BorderSize = 0;
-            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogin.Font = new System.Drawing.Font("Verdana", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogin.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnLogin.Location = new System.Drawing.Point(12, 0);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(170, 70);
-            this.btnLogin.TabIndex = 0;
-            this.btnLogin.Text = "Iniciar Sesión";
-            this.btnLogin.UseVisualStyleBackColor = false;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            this.btnIniciarSesion.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnIniciarSesion.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.btnIniciarSesion.FlatAppearance.BorderSize = 0;
+            this.btnIniciarSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnIniciarSesion.Font = new System.Drawing.Font("Verdana", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIniciarSesion.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnIniciarSesion.Location = new System.Drawing.Point(12, 0);
+            this.btnIniciarSesion.Name = "btnIniciarSesion";
+            this.btnIniciarSesion.Size = new System.Drawing.Size(170, 70);
+            this.btnIniciarSesion.TabIndex = 0;
+            this.btnIniciarSesion.Text = "Iniciar Sesión";
+            this.btnIniciarSesion.UseVisualStyleBackColor = false;
+            this.btnIniciarSesion.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // btnRegistrar
             // 
@@ -271,7 +271,7 @@
             // 
             this.panel6.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.panel6.Controls.Add(this.btnIngresar);
-            this.panel6.Controls.Add(this.btnRegistrarAccion);
+            this.panel6.Controls.Add(this.btnRegistrarse);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(30, 1);
             this.panel6.Name = "panel6";
@@ -293,20 +293,20 @@
             this.btnIngresar.UseVisualStyleBackColor = false;
             this.btnIngresar.Click += new System.EventHandler(this.btnIngresar_Click);
             // 
-            // btnRegistrarAccion
+            // btnRegistrarse
             // 
-            this.btnRegistrarAccion.BackColor = System.Drawing.Color.LimeGreen;
-            this.btnRegistrarAccion.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnRegistrarAccion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRegistrarAccion.Font = new System.Drawing.Font("Verdana", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegistrarAccion.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnRegistrarAccion.Location = new System.Drawing.Point(0, 0);
-            this.btnRegistrarAccion.Name = "btnRegistrarAccion";
-            this.btnRegistrarAccion.Size = new System.Drawing.Size(565, 59);
-            this.btnRegistrarAccion.TabIndex = 0;
-            this.btnRegistrarAccion.Text = "Registrarse";
-            this.btnRegistrarAccion.UseVisualStyleBackColor = false;
-            this.btnRegistrarAccion.Click += new System.EventHandler(this.btnRegistrarAccion_Click);
+            this.btnRegistrarse.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnRegistrarse.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnRegistrarse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRegistrarse.Font = new System.Drawing.Font("Verdana", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRegistrarse.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnRegistrarse.Location = new System.Drawing.Point(0, 0);
+            this.btnRegistrarse.Name = "btnRegistrarse";
+            this.btnRegistrarse.Size = new System.Drawing.Size(565, 59);
+            this.btnRegistrarse.TabIndex = 0;
+            this.btnRegistrarse.Text = "Registrarse";
+            this.btnRegistrarse.UseVisualStyleBackColor = false;
+            this.btnRegistrarse.Click += new System.EventHandler(this.btnRegistrarAccion_Click);
             // 
             // panel5
             // 
@@ -364,7 +364,7 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.Button btnIniciarSesion;
         private System.Windows.Forms.Panel panelChildForm;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnRegistrar;
@@ -375,7 +375,7 @@
         private System.Windows.Forms.Button btnUsarCompu;
         private System.Windows.Forms.Panel subPanel2;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button btnRegistrarAccion;
+        private System.Windows.Forms.Button btnRegistrarse;
         private System.Windows.Forms.Button btnIngresar;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Panel panel4;

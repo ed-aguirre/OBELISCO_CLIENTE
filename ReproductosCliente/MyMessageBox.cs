@@ -54,6 +54,11 @@ namespace ReproductosCliente
                     lblData.Text = "¿Deseas cerrar sesión?";
                     MostrarBotones(BOTONES_YES_NO);
                     break;
+                case 5:
+                    Text = "Login exitoso.";
+                    lblData.Text = "Iniciando sesión...";
+                    MostrarBotones(BOTONES_ACEPTAR);
+                    break;
                 default:
                     Text = "ERROR";
                     lblData.Text = "Al parecer ocurrio un error.";

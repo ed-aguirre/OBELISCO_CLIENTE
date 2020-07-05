@@ -3,19 +3,57 @@ using System.Windows.Forms;
 
 namespace ReproductosCliente
 {
-    class Logica : FormPrincipal
+    class Logica 
     {
-        
+        private const int BLOQUEAR_FORM = 1;
+        private string ESTADO;
+        private string FECHA ;
+
         public Logica()
         {
-            Console.WriteLine("Clase uno inicidaa");
+            Console.WriteLine("Logica iniciada");
         }
 
+        public Boolean ValidarTipoUsuario(IConsumidor consumidor)
+        {
+            if(ValidarEstadoUsuario(consumidor) || ValidarFechaExpiracion(consumidor))
+            {
+                //si alguno da true, no puede acceder
+                return false; 
+            }
+            return true;
+        }
+
+        private Boolean ValidarEstadoUsuario(IConsumidor consumidor)
+        {
+            if (consumidor.getEstadoUsuario() != 2)
+            {
+                ESTADO = Consumidor.nombrarTipoEstado(consumidor.getEstadoUsuario());
+                new MyMessageBox().
+                    Show(ESTADO + "\nTu usuario no tiene permitido entrar al sistema.");
+                return true;
+            }
+            return false;
+        }
+        private Boolean ValidarFechaExpiracion(IConsumidor consumidor)
+        {
+            DateTime fechaExp = consumidor.getFechaExpiracion();
+            DateTime fechaActual = DateTime.Now;
+
+            if ( DateTime.Compare(fechaExp, fechaActual) < 0  )
+            {
+                FECHA = "Fecha Expirada";
+                new MyMessageBox().
+                    Show(FECHA + "\nTu usuario no tiene permitido entrar al sistema.");
+                return true;
+            }
+            return false;
+        }
         public void manipularForm(int bloqueo) //recibe 1 si se quiere desbloquer(minizar) y 0 si se quiere bloquear el form1
         {
             FormCollection fc = Application.OpenForms; //crear coleccion de Forms
             
-            if(bloqueo == 1)
+            if(bloqueo == BLOQUEAR_FORM)
             {
                 fc[0].FormBorderStyle = FormBorderStyle.Sizable; //hago el form principal manejable
                 //quitar esta linea de arriba al final!!

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
@@ -8,19 +9,28 @@ namespace ReproductosCliente
     
     public partial class FormPrincipal : Form
     {
-        FormRegistro FormRegistro = new FormRegistro();
-        private ConectorBD _conectarBD = new ConectorBD();
-        private const int REGISTRO_EXITO = 1;
-        private const int REGISTRO_SIN_EXITO = 0;
+        FormRegistro FR;
+        FormLogin FL;
+        FormCliente FC;
+        Logica logica;
 
-        private const int VISTA_ARRANQUE = 1;
+        private const byte REGISTRO_EXITO = 1;
+        private const byte REGISTRO_SIN_EXITO = 0;
+
+        private const byte VISTA_ARRANQUE = 1;
+        private const byte VISTA_CONSUMIDOR = 0;
+
+        private const byte MOSTRAR_BTN_REGISTRARSE = 0;
+        private const byte MOSTRAR_BTN_INGRESAR = 1;
+
+        private const byte LOGIN_EXITO = 5;
 
         public FormPrincipal()
         {
             InitializeComponent();
             Colorear_panel();
             bloquearForm();
-            customDesing(1);
+            customDesing(VISTA_ARRANQUE);
             
         }
         private void Colorear_panel() //pinta el panel lateral
@@ -37,18 +47,18 @@ namespace ReproductosCliente
             {
                 subPanel1.Visible = false;//Y VUELVE INVISIBLE EL PRIMER PANEL
                 btnIngresar.Visible = false;
-                btnRegistrarAccion.Visible = false;
+                btnRegistrarse.Visible = false;
                 btnBack.Visible = false;
             }
-            else if(casoInicio == 0) 
+            else if(casoInicio == VISTA_CONSUMIDOR) 
             {
                 cambioMenu(); //cambio la vista de los submenus principales
                 btnIngresar.Visible = false; //vuelve invisible a los botones de login
-                btnRegistrarAccion.Visible = false;
+                btnRegistrarse.Visible = false;
                 btnBack.Visible = false;
 
                 btnRegistrar.BackColor = Color.CornflowerBlue;//regresa a los colores originales:)
-                btnLogin.BackColor = Color.CornflowerBlue;
+                btnIniciarSesion.BackColor = Color.CornflowerBlue;
             }
             
         }
@@ -71,50 +81,64 @@ namespace ReproductosCliente
         public void cambioBotones(int boton)
         {
             btnBack.Visible = true;
-            if(boton == 0)
+            if(boton == MOSTRAR_BTN_REGISTRARSE)
             {
                 btnRegistrar.BackColor = Color.LightSteelBlue;//cambia los colores
-                btnLogin.BackColor = Color.CornflowerBlue;
+                btnIniciarSesion.BackColor = Color.CornflowerBlue;
 
                 btnIngresar.Visible = false;//cambia la visibilidad
-                btnRegistrarAccion.Visible = true;
+                btnRegistrarse.Visible = true;
             }
-            else if( boton == 1)
+            else if( boton == MOSTRAR_BTN_INGRESAR)
             {
-                btnLogin.BackColor = Color.LightSteelBlue;//cambia lo colores
+                btnIniciarSesion.BackColor = Color.LightSteelBlue;//cambia lo colores
                 btnRegistrar.BackColor = Color.CornflowerBlue;
 
-                btnRegistrarAccion.Visible = false;//cambia la visibilidad
+                btnRegistrarse.Visible = false;//cambia la visibilidad
                 btnIngresar.Visible = true;
             }
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            FormLogin fl = new FormLogin();
-            abrirChildForm(fl);//se crea el objeto formLogin y se pasa como parametro
-            cambioBotones(1); //se envia un parametro uno, para indicar al metodo que es login
-
+            FL = new FormLogin();
+            abrirChildForm(FL);//se crea el objeto formLogin y se pasa como parametro
+            cambioBotones( MOSTRAR_BTN_INGRESAR ); //se envia un parametro uno, para indicar al metodo que es login
+            
         }
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            abrirChildForm(FormRegistro);//igual que el metodo anterior pero con el formRegistro
-            cambioBotones(0);//se envia como parametro 0 para indicar al metodo que es el registro
+            FR = new FormRegistro();
+            abrirChildForm(FR);
+            cambioBotones(MOSTRAR_BTN_REGISTRARSE);
         }
         private void btnIngresar_Click(object sender, EventArgs e) //este es el que manda datos al dataCliente
         {
-            FormCliente fm3 = new FormCliente();
-            abrirChildForm(fm3); // se abre el form cliente
-            customDesing(0); // se cambia a la vista para mostrar los botones del cliente
-            
-            //_conectarBD.Conectar();
-             
+            Dictionary<string, Object> dataUser;
+            logica = new Logica();
+            if (FL.validarCampos())
+            {
+                dataUser = FL.iniciarSesion();
+                if(dataUser.Count > 0)
+                {
+                    if ( logica.ValidarTipoUsuario( Consumidor.FromMap(dataUser) ) ) //true == pasa
+                    {
+                        new MyMessageBox().Show(LOGIN_EXITO);
+
+                        FC = new FormCliente();
+                        abrirChildForm(FC);
+                        customDesing(VISTA_CONSUMIDOR);
+                    }
+
+                }
+            }
+
         }
         private void btnBack_Click(object sender, EventArgs e)
         {
             activeForm.Close(); //cierra cualquier form activo
-            customDesing(1);//regresa a la vista de Arranque
+            customDesing(VISTA_ARRANQUE);//regresa a la vista de Arranque
         }
 
         private Form activeForm = null;
@@ -181,13 +205,13 @@ namespace ReproductosCliente
 
         private void button3_Click(object sender, EventArgs e) //btnCerrarSesion
         {
-            Logica cl = new Logica();
+            /*Logica cl = new Logica();
             int respuesta = cl.alerta(1); //guarda el valor del dialog result(1 o 0)
             if( respuesta == 1) //si selecciona si, se cerrará todo los forms y saldra de la sesion
             {
                 activeForm.Close();
                 cambioMenu();
-                if(cl.verificarForm() == true)
+                if(cl.verificarForm())
                 {
                     FormCollection fc = Application.OpenForms;
                     fc[1].Close();//el FormTimer siempre va a estar en la posición 1 del FormCollection
@@ -198,29 +222,28 @@ namespace ReproductosCliente
             else
             {
                 Console.WriteLine("El usuario cancelo la accion.");
-            }
+            }*/
         }
 
         private void btnRegistrarAccion_Click(object sender, EventArgs e)//boton RegistrarAccion
         {
             int respuesta = 0;
-            if(FormRegistro.validarCampos())//true = todo bien
+            if(FR.validarCampos())//true = todo bien
             {
-                FormRegistro.setCampos();
-                respuesta = FormRegistro.EnviarDatosUsuario();
-            }
+                FR.setCampos();
+                respuesta = FR.EnviarDatosUsuario();
 
-            if( respuesta == REGISTRO_EXITO)
-            {
-                new MyMessageBox().Show(REGISTRO_EXITO);
-                activeForm.Close();
-                customDesing( VISTA_ARRANQUE );
+                if (respuesta == REGISTRO_EXITO)
+                {
+                    new MyMessageBox().Show(REGISTRO_EXITO);
+                    activeForm.Close();
+                    customDesing(VISTA_ARRANQUE);
+                }
+                else
+                {
+                    new MyMessageBox().Show(REGISTRO_SIN_EXITO);
+                }
             }
-            else
-            {
-                new MyMessageBox().Show(REGISTRO_SIN_EXITO);
-            }
-            
         }
 
         private void panel4_Paint(object sender, PaintEventArgs e)

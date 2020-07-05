@@ -12,7 +12,7 @@ namespace ReproductosCliente
         FormRegistro FR;
         FormLogin FL;
         FormCliente FC;
-        Logica logica;
+        Logica logica = new Logica();
 
         private const byte REGISTRO_EXITO = 1;
         private const byte REGISTRO_SIN_EXITO = 0;
@@ -28,10 +28,11 @@ namespace ReproductosCliente
         public FormPrincipal()
         {
             InitializeComponent();
+
+            logica.setPrgmsEducativos();
             Colorear_panel();
             bloquearForm();
             customDesing(VISTA_ARRANQUE);
-            
         }
         private void Colorear_panel() //pinta el panel lateral
         {
@@ -109,24 +110,23 @@ namespace ReproductosCliente
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            FR = new FormRegistro();
+            FR = new FormRegistro(logica.getPrgmsEducativo()) ;
+            
             abrirChildForm(FR);
             cambioBotones(MOSTRAR_BTN_REGISTRARSE);
         }
         private void btnIngresar_Click(object sender, EventArgs e) //este es el que manda datos al dataCliente
         {
-            Dictionary<string, Object> dataUser;
-            logica = new Logica();
             if (FL.validarCampos())
             {
-                dataUser = FL.iniciarSesion();
-                if(dataUser.Count > 0)
+                logica.setDatosCliente(FL.iniciarSesion());
+                if(logica.getDatosCliente().Count > 0)
                 {
-                    if ( logica.ValidarTipoUsuario( Consumidor.FromMap(dataUser) ) ) //true == pasa
+                    if ( logica.ValidarTipoUsuario( Consumidor.FromMap(logica.getDatosCliente()) ) ) //true == pasa
                     {
                         new MyMessageBox().Show(LOGIN_EXITO);
 
-                        FC = new FormCliente();
+                        FC = new FormCliente( logica.getDatosCliente(), logica.getPrgmsEducativo() );
                         abrirChildForm(FC);
                         customDesing(VISTA_CONSUMIDOR);
                     }
@@ -174,9 +174,10 @@ namespace ReproductosCliente
             abrirChildForm( new FormUsarPC() );
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)// Perfil
         {
-            abrirChildForm( new FormCliente() );
+            FC = new FormCliente(logica.getDatosCliente(), logica.getPrgmsEducativo());
+            abrirChildForm(FC);
         }
 
         private void button2_Click_1(object sender, EventArgs e)

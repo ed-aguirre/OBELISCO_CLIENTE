@@ -17,23 +17,27 @@ namespace ReproductosCliente
     public partial class FormRegistro : Form
     {
         private IConsumidor consumidor = new Consumidor();
-        private string programaEducativo;
-        string txtAlerta;
-
         private Regex regex = new Regex("^(ZS+[0-9]{8}$|^[0-9]{5,7}$)");
-        private const int ID_EXISTENTE = 1;
         Dictionary<string, string> programas;
-
+        
+        private string programaEducativo;
+        private string txtAlerta;
+        private const int ID_EXISTENTE = 1;
+        
         public FormRegistro()
         {
             Console.WriteLine("REGISTRO");
-            programas = new ConectorBD().getProgramas();
             InitializeComponent();
-            
+        }
+
+        public FormRegistro(Dictionary<string, string> programas)
+        {
+            this.programas = programas;
+
+            InitializeComponent();
             comboPrograma.DataSource = programas.Values.ToArray();
             inputApellidoPaterno.Text = "Apellido Paterno";
             inputApellidoMaterno.Text = "Apellido Materno";
-
         }
         
         private void textBox1_TextChanged(object sender, EventArgs e)

@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace ReproductosCliente
 {
     class Logica 
     {
+        private IConsumidor consumidor;
+        private Dictionary<string, string> programas;
+        private Dictionary<string, Object> datosCliente;
+
         private const int BLOQUEAR_FORM = 1;
         private string ESTADO;
         private string FECHA ;
@@ -12,6 +17,24 @@ namespace ReproductosCliente
         public Logica()
         {
             Console.WriteLine("Logica iniciada");
+        }
+
+        public void setPrgmsEducativos()
+        {
+            this.programas = new ConectorBD().getProgramas();
+        }
+        public Dictionary<string,string> getPrgmsEducativo()
+        {
+            return programas;
+        }
+
+        public void setDatosCliente(Dictionary<string, Object> datos)
+        {
+            datosCliente = datos;
+        }
+        public Dictionary<string, Object> getDatosCliente()
+        {
+            return datosCliente;
         }
 
         public Boolean ValidarTipoUsuario(IConsumidor consumidor)

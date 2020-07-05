@@ -31,17 +31,15 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCliente));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.lblNombre = new System.Windows.Forms.Label();
+            this.lblNombreCompleto = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.lblMatricula = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblSaldo = new System.Windows.Forms.Label();
-            this.lblApellidos = new System.Windows.Forms.Label();
             this.lblCarrera = new System.Windows.Forms.Label();
+            this.lblPrgmEducativo = new System.Windows.Forms.Label();
+            this.lblMatricula = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,22 +63,22 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Bienvenido/a:";
             // 
-            // lblNombre
+            // lblNombreCompleto
             // 
-            this.lblNombre.AutoSize = true;
-            this.lblNombre.Font = new System.Drawing.Font("Verdana", 12F);
-            this.lblNombre.Location = new System.Drawing.Point(174, 26);
-            this.lblNombre.Name = "lblNombre";
-            this.lblNombre.Size = new System.Drawing.Size(113, 18);
-            this.lblNombre.TabIndex = 1;
-            this.lblNombre.Text = "Luis Eduardo";
-            this.lblNombre.Click += new System.EventHandler(this.label2_Click);
+            this.lblNombreCompleto.AutoSize = true;
+            this.lblNombreCompleto.Font = new System.Drawing.Font("Verdana", 12F);
+            this.lblNombreCompleto.Location = new System.Drawing.Point(174, 31);
+            this.lblNombreCompleto.Name = "lblNombreCompleto";
+            this.lblNombreCompleto.Size = new System.Drawing.Size(69, 18);
+            this.lblNombreCompleto.TabIndex = 1;
+            this.lblNombreCompleto.Text = "nombre";
+            this.lblNombreCompleto.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(173, 78);
+            this.label3.Location = new System.Drawing.Point(173, 112);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(157, 23);
             this.label3.TabIndex = 1;
@@ -90,30 +88,11 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(336, 78);
+            this.label4.Location = new System.Drawing.Point(336, 112);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(24, 23);
             this.label4.TabIndex = 1;
             this.label4.Text = "$";
-            // 
-            // lblMatricula
-            // 
-            this.lblMatricula.AutoSize = true;
-            this.lblMatricula.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lblMatricula.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMatricula.Location = new System.Drawing.Point(9, 8);
-            this.lblMatricula.Name = "lblMatricula";
-            this.lblMatricula.Size = new System.Drawing.Size(0, 23);
-            this.lblMatricula.TabIndex = 1;
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.panel1.Controls.Add(this.lblMatricula);
-            this.panel1.Location = new System.Drawing.Point(13, 164);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(154, 33);
-            this.panel1.TabIndex = 2;
             // 
             // panel2
             // 
@@ -121,13 +100,13 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.panel2.Controls.Add(this.lblMatricula);
+            this.panel2.Controls.Add(this.lblPrgmEducativo);
             this.panel2.Controls.Add(this.pictureBox1);
-            this.panel2.Controls.Add(this.panel1);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.lblSaldo);
             this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.lblApellidos);
-            this.panel2.Controls.Add(this.lblNombre);
+            this.panel2.Controls.Add(this.lblNombreCompleto);
             this.panel2.Controls.Add(this.lblCarrera);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Location = new System.Drawing.Point(27, 51);
@@ -139,20 +118,10 @@
             // 
             this.lblSaldo.AutoSize = true;
             this.lblSaldo.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSaldo.Location = new System.Drawing.Point(366, 78);
+            this.lblSaldo.Location = new System.Drawing.Point(366, 112);
             this.lblSaldo.Name = "lblSaldo";
             this.lblSaldo.Size = new System.Drawing.Size(0, 23);
             this.lblSaldo.TabIndex = 1;
-            // 
-            // lblApellidos
-            // 
-            this.lblApellidos.AutoSize = true;
-            this.lblApellidos.Font = new System.Drawing.Font("Verdana", 12F);
-            this.lblApellidos.Location = new System.Drawing.Point(284, 26);
-            this.lblApellidos.Name = "lblApellidos";
-            this.lblApellidos.Size = new System.Drawing.Size(134, 18);
-            this.lblApellidos.TabIndex = 1;
-            this.lblApellidos.Text = "Aguirre fuentes";
             // 
             // lblCarrera
             // 
@@ -162,6 +131,28 @@
             this.lblCarrera.Name = "lblCarrera";
             this.lblCarrera.Size = new System.Drawing.Size(0, 23);
             this.lblCarrera.TabIndex = 1;
+            // 
+            // lblPrgmEducativo
+            // 
+            this.lblPrgmEducativo.AutoSize = true;
+            this.lblPrgmEducativo.Font = new System.Drawing.Font("Verdana", 12F);
+            this.lblPrgmEducativo.Location = new System.Drawing.Point(173, 64);
+            this.lblPrgmEducativo.Name = "lblPrgmEducativo";
+            this.lblPrgmEducativo.Size = new System.Drawing.Size(128, 18);
+            this.lblPrgmEducativo.TabIndex = 3;
+            this.lblPrgmEducativo.Text = "PrgmEducativo";
+            // 
+            // lblMatricula
+            // 
+            this.lblMatricula.AutoSize = true;
+            this.lblMatricula.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblMatricula.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMatricula.Location = new System.Drawing.Point(32, 161);
+            this.lblMatricula.Name = "lblMatricula";
+            this.lblMatricula.Size = new System.Drawing.Size(126, 23);
+            this.lblMatricula.TabIndex = 1;
+            this.lblMatricula.Text = "zs00000000";
+            this.lblMatricula.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FormCliente
             // 
@@ -174,8 +165,6 @@
             this.Text = "FormCliente";
             this.Load += new System.EventHandler(this.FormCliente_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
@@ -186,14 +175,13 @@
 
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lblNombre;
+        private System.Windows.Forms.Label lblNombreCompleto;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label lblMatricula;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label lblApellidos;
         private System.Windows.Forms.Label lblSaldo;
         private System.Windows.Forms.Label lblCarrera;
+        private System.Windows.Forms.Label lblPrgmEducativo;
+        private System.Windows.Forms.Label lblMatricula;
     }
 }

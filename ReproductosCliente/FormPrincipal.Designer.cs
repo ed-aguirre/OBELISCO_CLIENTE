@@ -71,7 +71,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(210, 499);
             this.panel1.TabIndex = 0;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // subPanel2
             // 
@@ -147,7 +146,7 @@
             this.btnPerfil.Text = "Perfil";
             this.btnPerfil.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnPerfil.UseVisualStyleBackColor = false;
-            this.btnPerfil.Click += new System.EventHandler(this.button4_Click);
+            this.btnPerfil.Click += new System.EventHandler(this.btnPerfil_Click);
             // 
             // btnCerrarSesion
             // 
@@ -165,7 +164,7 @@
             this.btnCerrarSesion.Text = "Cerrar Sesión";
             this.btnCerrarSesion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCerrarSesion.UseVisualStyleBackColor = false;
-            this.btnCerrarSesion.Click += new System.EventHandler(this.button3_Click);
+            this.btnCerrarSesion.Click += new System.EventHandler(this.btnCerrarSesion_Click);
             // 
             // btnUsarRap
             // 
@@ -183,7 +182,7 @@
             this.btnUsarRap.Text = "Uso rápido";
             this.btnUsarRap.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnUsarRap.UseVisualStyleBackColor = false;
-            this.btnUsarRap.Click += new System.EventHandler(this.button2_Click_1);
+            this.btnUsarRap.Click += new System.EventHandler(this.btnUsoRapido_Click);
             // 
             // btnUsarCompu
             // 
@@ -201,7 +200,7 @@
             this.btnUsarCompu.Text = "Usar computadora";
             this.btnUsarCompu.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnUsarCompu.UseVisualStyleBackColor = false;
-            this.btnUsarCompu.Click += new System.EventHandler(this.button1_Click);
+            this.btnUsarCompu.Click += new System.EventHandler(this.btnUsarPC_Click);
             // 
             // panelBase
             // 
@@ -212,7 +211,6 @@
             this.panelBase.Name = "panelBase";
             this.panelBase.Size = new System.Drawing.Size(193, 264);
             this.panelBase.TabIndex = 2;
-            this.panelBase.Paint += new System.Windows.Forms.PaintEventHandler(this.panelBase_Paint);
             // 
             // btnBack
             // 
@@ -251,7 +249,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // panel2
             // 
@@ -325,7 +322,6 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(30, 71);
             this.panel4.TabIndex = 3;
-            this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
             // 
             // panel3
             // 

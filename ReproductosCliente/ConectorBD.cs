@@ -19,8 +19,10 @@ namespace ReproductosCliente
         string bd = "ccomputo";
         
 
-        const int ID_USUARIO_EXISTE = 1;
-        const int ID_USUARIO_INEXISTENTE = 0;
+        const byte ID_USUARIO_EXISTE = 1;
+        const byte ID_USUARIO_INEXISTENTE = 0;
+        const byte UPDATE_EXITO = 1;
+        const byte UPDATE_SIN_EXITO = 0;
 
         MySqlConnection conexionBD;
 
@@ -171,7 +173,6 @@ namespace ReproductosCliente
             try
             {
                 conexionBD.Open();
-                MySqlDataReader reader = null;
 
                 MySqlCommand cmd = new MySqlCommand(sql, conexionBD);
                 respuesta = cmd.ExecuteNonQuery();
@@ -187,6 +188,56 @@ namespace ReproductosCliente
                 MessageBox.Show(ex.ToString());
             }
             return respuesta;
+        }
+
+        public int updateEstadoUsuario(string matricula)
+        {
+            int respuesta = 0;
+            string sql = string.Format(
+                "UPDATE usuario SET estadoUsuario = 4 WHERE idUsuario = '{0}'",
+                matricula);
+            
+            Header();
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand(sql, conexionBD);
+                conexionBD.Open();
+
+                respuesta = cmd.ExecuteNonQuery();
+                if( respuesta > 0)
+                {
+                    return respuesta;
+                }
+
+            }catch(MySqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return respuesta;
+        }
+
+        public int updateSaldo(float saldo,string matricula)
+        {
+            string sql = string.Format("UPDATE usuario SET saldo = {0} WHERE idUsuario = '{1}'",
+                saldo, matricula);
+            int respuesta = 0;
+
+            Header();
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand(sql, conexionBD);
+                conexionBD.Open();
+
+                respuesta = cmd.ExecuteNonQuery();
+                if(respuesta > 0)
+                {
+                    return UPDATE_EXITO;
+                }
+            }catch(MySqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return UPDATE_SIN_EXITO;
         }
 
         public void Conectar()

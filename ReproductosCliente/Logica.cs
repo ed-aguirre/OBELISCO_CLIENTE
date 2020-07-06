@@ -10,7 +10,8 @@ namespace ReproductosCliente
         private Dictionary<string, string> programas;
         private Dictionary<string, Object> datosCliente;
 
-        private const int BLOQUEAR_FORM = 1;
+        private const byte DESBLOQUEAR_FORM = 1;
+        private const byte CERRAR_SESION = 4;
         private string ESTADO;
         private string FECHA ;
 
@@ -66,22 +67,25 @@ namespace ReproductosCliente
             if ( DateTime.Compare(fechaExp, fechaActual) < 0  )
             {
                 FECHA = "Fecha Expirada";
+                new ConectorBD().updateEstadoUsuario(consumidor.getIdUsuario());
+
                 new MyMessageBox().
                     Show(FECHA + "\nTu usuario no tiene permitido entrar al sistema.");
                 return true;
             }
             return false;
         }
+        
         public void manipularForm(int bloqueo) //recibe 1 si se quiere desbloquer(minizar) y 0 si se quiere bloquear el form1
         {
             FormCollection fc = Application.OpenForms; //crear coleccion de Forms
             
-            if(bloqueo == BLOQUEAR_FORM)
+            if(bloqueo == DESBLOQUEAR_FORM)
             {
-                fc[0].FormBorderStyle = FormBorderStyle.Sizable; //hago el form principal manejable
+                fc[0].FormBorderStyle = FormBorderStyle.Sizable;
                 //quitar esta linea de arriba al final!!
                 fc[0].TopMost = false; // lo quito del top
-                fc[0].WindowState = FormWindowState.Minimized; //y se miniza
+                fc[0].WindowState = FormWindowState.Minimized; //y se minimiza
                 //en la posición 0 porque es el primer form de la coleccion
                 
             }
@@ -92,58 +96,60 @@ namespace ReproductosCliente
                 fc[0].WindowState = FormWindowState.Maximized; //y se maximiza
             }
 
-
         }
 
-        public int alerta(int tipo) 
-            //hay tipos de alertas (1= alerta de cerraSesion, 2= alerta de tiempo)
+        public Boolean saldoSuficiente(IConsumidor consumidor)
         {
-            String titulo = "";
-            String texto = "";
-            MessageBoxButtons boton = MessageBoxButtons.OK;
-            switch (tipo)
-            {
-                case 1: //cuando sea uno sera el caso de CerrarSesion
-                    titulo = "Cerrar Sesión";
-                    texto = "¿Deseas cerrar sesión?";
-                    boton = MessageBoxButtons.YesNo;
-                    break;
-                case 2: //cuando sea 2 será el caso de Tiempo excedido
-                    titulo = "Tiempo excedido";
-                    texto = "Tu tiempo se ha agotado, ¿deseas seguir utilizando el equipo?";
-                    boton = MessageBoxButtons.YesNo;
-                    break;
-                case 3: //3: el tiempo agotado del tiempo rápido
-                    titulo = "Tiempo excedido";
-                    texto = "Tu tiempo se ha agotado. Se cerrará la sesión.";
-                    boton = MessageBoxButtons.OK;
-                    break;
-                case 4: //4: alerta de registro completado
-                    titulo = "Registro realizado";
-                    texto = "Ve con el Administrador para completar el registro. No olvides llevar tu credencial UV.";
-                    boton = MessageBoxButtons.OK;
-                    break;
-                default:
-                    Console.WriteLine("No hay default");
-                    break;
-            }
+            float nuevoSaldo = consumidor.getSaldo() - 3;
 
-            DialogResult r = MessageBox.Show(texto, titulo, boton);
-            //crea un objeto de DialogResult y guarda el valor que el usuario seleccione
-            if( r == DialogResult.Yes || r == DialogResult.OK)
+            if ( nuevoSaldo >= 0)
             {
-                return 1;
+                string alerta = string.Format("Despues de la operación tu saldo disponible será de:\n" +
+                    "$ {0}\n" +
+                    "¿Deseas continuar?", nuevoSaldo);
+                DialogResult result = new MyMessageBox().Show(alerta);
+
+                if(result == DialogResult.OK)
+                {
+                    consumidor.setSaldo(nuevoSaldo);
+                    int respuesta = new ConectorBD().updateSaldo(nuevoSaldo,consumidor.getIdUsuario());
+                    if(respuesta == 1)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        new MyMessageBox().Show();// error
+                    }
+                }
             }
             else
             {
-                return 0;
+                new MyMessageBox().Show("Saldo insuficiente.");
             }
+            return false;
+        }
 
+
+        public Boolean cerrarSesion()
+        {
+            DialogResult result = new MyMessageBox().Show(CERRAR_SESION);
+            if ( result == DialogResult.Yes)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public void vaciarDatosUsuario()
+        {
+            this.consumidor = null;
+            this.datosCliente.Clear();
         }
 
         public void alertaTimerOpen() //solo se usa cuando el timer ya se haya iniciado
         {
-            MessageBox.Show("Ya se ha iniciado el cronometro.", "Tiempo iniciado", MessageBoxButtons.OK);
+            new MyMessageBox().Show("Ya se ha iniciado el cronometro.");
         }
 
         public void abrirTimer(int tipo) //recibe un entero que sera el tipo de tiemr (1= 3 horas, 0= 3minutos)

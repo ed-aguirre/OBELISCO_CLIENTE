@@ -12,29 +12,37 @@ namespace ReproductosCliente
 {
     public partial class FormTimer : Form
     {
-        public int segundos = 60;
-        public int minutos = 0;
-        public int horas = 0;
-        public int tipoInicio = 0;
-        public FormTimer(int tipo)
+        Logica logica;
+        private int segundos = 60;
+        private int minutos = 0;
+        private int horas = 0;
+        private int tipoInicio = 0;
+
+        private const byte MODO_RAPIDO = 0;
+        private const byte MODO_USAR_PC = 1;
+
+        private const byte BLOQUEAR_FORM = 0;
+        private const byte ALERTA_MODO_RAPIDO = 3;
+        private const byte ALERTA_MODO_USAR_PC = 2;
+        public FormTimer(int modo)
         {
             InitializeComponent();
-            //FormBorderStyle = FormBorderStyle.FixedToolWindow; // este es una ventanita pero se puede cerrar
+            FormBorderStyle = FormBorderStyle.FixedToolWindow; // este es una ventanita pero se puede cerrar
             TopMost = true;
             this.ControlBox = false;
-            inicio(tipo);// si es tipo 1, se iniciara con 3 horas, else seran 3 minutos
+            inicio(modo);// si es tipo 1, se iniciara con 3 horas, else seran 3 minutos
 
         }
-        public void inicio(int tipo) //metodo que inicia el timer
+        public void inicio(int modo) //metodo que inicia el timer
         {
-            if(tipo == 1)
+            if(modo == MODO_USAR_PC)
             {
                 minutos = 60;
                 horas = 2;
             }
             else
             {
-                minutos = 3;//CAMBIAR A 3
+                minutos = 3;
             }
             lblSegundo.Text = segundos.ToString();
             lblMinuto.Text = valorTimer(minutos);
@@ -48,7 +56,7 @@ namespace ReproductosCliente
             if( horas == 0 && minutos== 0 && segundos == 0)
             {
                 tmr.Enabled = false;
-                tiempoAgotado(0);
+                tiempoAgotado(MODO_RAPIDO);
                 this.Close(); //nose si comentar esta linea hmmm
                 
             }
@@ -81,24 +89,25 @@ namespace ReproductosCliente
             
         }
 
-        private void tiempoAgotado(int tipoInicio)
+        private void tiempoAgotado(int modo)
         {
-            Logica cl = new Logica();
-            if(tipoInicio == 0) // el tiempo rapido, entonces tendrá que salir del programa
+            logica = new Logica();
+            if(modo == MODO_RAPIDO) // el tiempo rapido, Salir del programa
             {
-                cl.manipularForm(0); //se maximiza el form y lo bloquea.
-                cl.alerta(3); //se envia la alerta del tiempo excedido
+                logica.manipularForm(BLOQUEAR_FORM);
+                //maximiza y bloquea. siento que necesito acceder al bloqeuar form directo del principal
+                new MyMessageBox().Show(ALERTA_MODO_RAPIDO);
 
                 forzarCerrarSesion(); // manipula el form1 y cierra sesión
 
             }
-            else //el tiempo de 2 horas, por lo que tiene que preguntar si desea continuar
+            else //el tiempo de 2 horas
             {
-                cl.manipularForm(0); //se maximiza el form y lo bloquea.
-                int continuar = cl.alerta(2); //se envia la alerta del tiempo excedido
-                if(continuar == 1) //si le da yes, se cobrará 3$ y se reiniciará el contador
+                logica.manipularForm(BLOQUEAR_FORM); //se maximiza el form y lo bloquea.
+                DialogResult continuar = new MyMessageBox().Show(ALERTA_MODO_USAR_PC); //se envia la alerta del tiempo excedido
+                if(continuar == DialogResult.Yes) 
                 {
-                    //ya se
+                    new MyMessageBox().Show("No olvides cerrar sesión cuando termines.");
                 }
                 else
                 {

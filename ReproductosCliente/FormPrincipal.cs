@@ -12,6 +12,8 @@ namespace ReproductosCliente
         FormRegistro FR;
         FormLogin FL;
         FormCliente FC;
+        FormUsarPC FPC;
+        FormUsoRapido FUR;
         Logica logica = new Logica();
 
         private const byte REGISTRO_EXITO = 1;
@@ -66,12 +68,12 @@ namespace ReproductosCliente
 
         public void cambioMenu()//cambia la visibilidad de los paneles cuando selecciona login o registrar
         {
-            if(subPanel2.Visible == true)
+            if(subPanel2.Visible)
             {
                 subPanel2.Visible = false;
                 subPanel1.Visible = true;
             }
-            else if (subPanel1.Visible == true)
+            else if (subPanel1.Visible)
             {
                 subPanel1.Visible = false;
                 subPanel2.Visible = true;
@@ -157,74 +159,32 @@ namespace ReproductosCliente
 
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-        }
-        private void panelBase_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-        
-        private void button1_Click(object sender, EventArgs e)
-        {
-            abrirChildForm( new FormUsarPC() );
-        }
-
-        private void button4_Click(object sender, EventArgs e)// Perfil
+        private void btnPerfil_Click(object sender, EventArgs e)
         {
             FC = new FormCliente(logica.getDatosCliente(), logica.getPrgmsEducativo());
             abrirChildForm(FC);
         }
 
-        private void button2_Click_1(object sender, EventArgs e)
+        private void btnUsarPC_Click(object sender, EventArgs e)
         {
-            abrirChildForm(new FormUsoRapido());
+            FPC = new FormUsarPC( logica.getDatosCliente() );
+            abrirChildForm( FPC );
         }
-        private void bloquearForm() //bloquea el form1 para que el usuario no pueda manipularlo
+
+        private void btnUsoRapido_Click(object sender, EventArgs e)
+        {
+            FUR = new FormUsoRapido();
+            abrirChildForm(FUR);
+        }
+
+        public void bloquearForm() //bloquea el form1 para que el usuario no pueda manipularlo
         { 
-            // no se di dejar esta funcion, pues en la class1 tambien se hace esto, hmm
             FormBorderStyle = FormBorderStyle.None;
-            WindowState = FormWindowState.Maximized;
-            //TopMost = true;
+            TopMost = true;
             //ESTA LINEA DE CODIGO ES IMPORTANTE, 
+            WindowState = FormWindowState.Maximized;
         }
 
-        public void cerrarActiveFormYCerrarSesion()
-        {
-            activeForm.Close(); //cierra el form activo
-            cambioMenu(); //cambia al meun inicial
-
-            FormCollection fc = Application.OpenForms; //objecto de FormCollection
-            fc[1].Close();//el FormTimer siempre va a estar en la posición 1 del FormCollection, y lo cierra
-
-            bloquearForm(); //bloquea el form
-        }
-
-        private void button3_Click(object sender, EventArgs e) //btnCerrarSesion
-        {
-            /*Logica cl = new Logica();
-            int respuesta = cl.alerta(1); //guarda el valor del dialog result(1 o 0)
-            if( respuesta == 1) //si selecciona si, se cerrará todo los forms y saldra de la sesion
-            {
-                activeForm.Close();
-                cambioMenu();
-                if(cl.verificarForm())
-                {
-                    FormCollection fc = Application.OpenForms;
-                    fc[1].Close();//el FormTimer siempre va a estar en la posición 1 del FormCollection
-                }
-                bloquearForm();
-                
-            }
-            else
-            {
-                Console.WriteLine("El usuario cancelo la accion.");
-            }*/
-        }
 
         private void btnRegistrarAccion_Click(object sender, EventArgs e)//boton RegistrarAccion
         {
@@ -247,9 +207,23 @@ namespace ReproductosCliente
             }
         }
 
-        private void panel4_Paint(object sender, PaintEventArgs e)
+        private void btnCerrarSesion_Click(object sender, EventArgs e)
         {
+            if (logica.cerrarSesion()) //si selecciona si, se cerrará todo los forms y saldra de la sesion
+            {
+                activeForm.Close();
+                cambioMenu();
+                logica.vaciarDatosUsuario();
 
+                if (logica.verificarForm())
+                {
+                    FormCollection fc = Application.OpenForms;
+                    fc[1].Close();
+                    //el FormTimer siempre va a estar en la posición 1 del FormCollection
+                }
+                bloquearForm();
+            }
         }
+
     }
 }

@@ -58,7 +58,7 @@
             this.lblData.Size = new System.Drawing.Size(64, 22);
             this.lblData.TabIndex = 0;
             this.lblData.Text = "label1";
-            this.lblData.Click += new System.EventHandler(this.lblData_Click);
+            //this.lblData.Click += new System.EventHandler(this.lblData_Click);
             // 
             // panel3
             // 
@@ -70,7 +70,7 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(684, 67);
             this.panel3.TabIndex = 0;
-            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
+            //this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
             // btnYes
             // 

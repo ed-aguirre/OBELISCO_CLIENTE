@@ -12,30 +12,41 @@ namespace ReproductosCliente
 {
     public partial class FormUsarPC : Form
     {
+        Logica logica;
+        private IConsumidor consumidor;
+        private const byte INICIAR_TIMER = 1;
+        private const byte DESBLOQUEAR_FORM = 1;
         public FormUsarPC()
         {
             InitializeComponent();
-            
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        public FormUsarPC(Dictionary<string,Object> datosUsuario)
         {
-
+            InitializeComponent();
+            this.consumidor = Consumidor.FromMap(datosUsuario);
         }
 
         private void btnAceptarUsar_Click(object sender, EventArgs e)
         {
-            Logica cl = new Logica();
-            if (cl.verificarForm() == true)  //verifica si existe el FormTimer abierto
+            logica = new Logica();
+            if (logica.verificarForm())  //si existe el FormTimer abierto
             {
-                cl.alertaTimerOpen();// alertar que ya esta abierto
+                logica.alertaTimerOpen();// alertar que ya esta abierto
             }
-            else //de lo contrario va iniciar el timer
+            else //iniciar timer
             {
-                this.Close();
-                cl.manipularForm(1);// se minimizaTodo
-                cl.abrirTimer(1); //se inicia el timer
+                if (logica.saldoSuficiente(consumidor))
+                {
+                    this.Close();
+                    logica.manipularForm(DESBLOQUEAR_FORM);// se minimizaTodo
+                    logica.abrirTimer(INICIAR_TIMER); //se inicia el timer
+                }
             }
+
+        }
+        private void label1_Click(object sender, EventArgs e)
+        {
 
         }
 

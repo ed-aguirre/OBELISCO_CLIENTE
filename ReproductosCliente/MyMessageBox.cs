@@ -19,16 +19,7 @@ namespace ReproductosCliente
             TopMost = true;
             InitializeComponent();
 
-            #pragma warning disable S125 // Sections of code should not be commented out
-             /* EJEMPLO DE USO DE mi alerta
-             DialogResult result = new MyMessageBox().Show(4);
-             if( result == DialogResult.OK)
-              {
-                Console.WriteLine(result.ToString());
-              }
-             */
         }
-#pragma warning restore S125 // Sections of code should not be commented out
 
         public DialogResult Show(int tipo)
         {
@@ -71,7 +62,7 @@ namespace ReproductosCliente
 
         public DialogResult Show(string textoAlerta)
         {
-            Text = "Validar Formulario";
+            Text = "Alerta";
             lblData.Text = textoAlerta;
             MostrarBotones(BOTONES_ACEPTAR);
 
@@ -113,11 +104,6 @@ namespace ReproductosCliente
             this.Close();
         }
 
-        private void lblData_Click(object sender, EventArgs e) { }
-        private void panel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
     }
 }

@@ -111,7 +111,6 @@
             this.Name = "FormTimer";
             this.Opacity = 0.77D;
             this.ShowIcon = false;
-            this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Cronometro";

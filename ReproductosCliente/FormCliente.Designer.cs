@@ -35,10 +35,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblMatricula = new System.Windows.Forms.Label();
+            this.lblPrgmEducativo = new System.Windows.Forms.Label();
             this.lblSaldo = new System.Windows.Forms.Label();
             this.lblCarrera = new System.Windows.Forms.Label();
-            this.lblPrgmEducativo = new System.Windows.Forms.Label();
-            this.lblMatricula = new System.Windows.Forms.Label();
+            this.btnDesbloquear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -100,6 +101,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.panel2.Controls.Add(this.btnDesbloquear);
             this.panel2.Controls.Add(this.lblMatricula);
             this.panel2.Controls.Add(this.lblPrgmEducativo);
             this.panel2.Controls.Add(this.pictureBox1);
@@ -113,6 +115,28 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(555, 273);
             this.panel2.TabIndex = 3;
+            // 
+            // lblMatricula
+            // 
+            this.lblMatricula.AutoSize = true;
+            this.lblMatricula.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblMatricula.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMatricula.Location = new System.Drawing.Point(32, 161);
+            this.lblMatricula.Name = "lblMatricula";
+            this.lblMatricula.Size = new System.Drawing.Size(126, 23);
+            this.lblMatricula.TabIndex = 1;
+            this.lblMatricula.Text = "zs00000000";
+            this.lblMatricula.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblPrgmEducativo
+            // 
+            this.lblPrgmEducativo.AutoSize = true;
+            this.lblPrgmEducativo.Font = new System.Drawing.Font("Verdana", 12F);
+            this.lblPrgmEducativo.Location = new System.Drawing.Point(173, 64);
+            this.lblPrgmEducativo.Name = "lblPrgmEducativo";
+            this.lblPrgmEducativo.Size = new System.Drawing.Size(128, 18);
+            this.lblPrgmEducativo.TabIndex = 3;
+            this.lblPrgmEducativo.Text = "PrgmEducativo";
             // 
             // lblSaldo
             // 
@@ -132,27 +156,19 @@
             this.lblCarrera.Size = new System.Drawing.Size(0, 23);
             this.lblCarrera.TabIndex = 1;
             // 
-            // lblPrgmEducativo
+            // btnDesbloquear
             // 
-            this.lblPrgmEducativo.AutoSize = true;
-            this.lblPrgmEducativo.Font = new System.Drawing.Font("Verdana", 12F);
-            this.lblPrgmEducativo.Location = new System.Drawing.Point(173, 64);
-            this.lblPrgmEducativo.Name = "lblPrgmEducativo";
-            this.lblPrgmEducativo.Size = new System.Drawing.Size(128, 18);
-            this.lblPrgmEducativo.TabIndex = 3;
-            this.lblPrgmEducativo.Text = "PrgmEducativo";
-            // 
-            // lblMatricula
-            // 
-            this.lblMatricula.AutoSize = true;
-            this.lblMatricula.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lblMatricula.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMatricula.Location = new System.Drawing.Point(32, 161);
-            this.lblMatricula.Name = "lblMatricula";
-            this.lblMatricula.Size = new System.Drawing.Size(126, 23);
-            this.lblMatricula.TabIndex = 1;
-            this.lblMatricula.Text = "zs00000000";
-            this.lblMatricula.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnDesbloquear.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDesbloquear.BackColor = System.Drawing.Color.Gainsboro;
+            this.btnDesbloquear.Font = new System.Drawing.Font("Verdana", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDesbloquear.Location = new System.Drawing.Point(13, 209);
+            this.btnDesbloquear.Name = "btnDesbloquear";
+            this.btnDesbloquear.Size = new System.Drawing.Size(527, 45);
+            this.btnDesbloquear.TabIndex = 4;
+            this.btnDesbloquear.Text = "Desbloquear PC";
+            this.btnDesbloquear.UseVisualStyleBackColor = false;
+            this.btnDesbloquear.Click += new System.EventHandler(this.btnDesbloquear_Click);
             // 
             // FormCliente
             // 
@@ -162,6 +178,7 @@
             this.ClientSize = new System.Drawing.Size(609, 370);
             this.Controls.Add(this.panel2);
             this.Name = "FormCliente";
+            this.ShowInTaskbar = false;
             this.Text = "FormCliente";
             this.Load += new System.EventHandler(this.FormCliente_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -183,5 +200,6 @@
         private System.Windows.Forms.Label lblCarrera;
         private System.Windows.Forms.Label lblPrgmEducativo;
         private System.Windows.Forms.Label lblMatricula;
+        private System.Windows.Forms.Button btnDesbloquear;
     }
 }

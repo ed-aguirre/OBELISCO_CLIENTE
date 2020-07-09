@@ -12,23 +12,39 @@ namespace ReproductosCliente
 {
     class ConectorBD
     {
+        private static ConectorBD mysql = null;
         string servidor = "localhost";
         string puerto = "3306";
         string usuario = "root";
         string pass = "";
         string bd = "ccomputo";
-        
 
-        const byte ID_USUARIO_EXISTE = 1;
+        const byte ID_USUARIO_EXISTENTE = 1;
         const byte ID_USUARIO_INEXISTENTE = 0;
+
+        const byte ID_EQUIPO_EXISTENTE = 1;
+        const byte ID_EQUIPO_INEXISTENTE = 0;
+
         const byte UPDATE_EXITO = 1;
         const byte UPDATE_SIN_EXITO = 0;
 
+        const byte REGISTRO_EXITO = 1;
+        const byte REGISTRO_SIN_EXITO = 0;
+
         MySqlConnection conexionBD;
 
-        public ConectorBD()
+        private ConectorBD()
         {
             Console.WriteLine("Servicio de DB ");
+        }
+
+        public static ConectorBD getInstancia()
+        {
+            if(mysql == null)
+            {
+                mysql = new ConectorBD();
+            }
+            return mysql;
         }
         public void Header()
         {
@@ -69,11 +85,12 @@ namespace ReproductosCliente
             return programas;
         }
 
-        public int existeMatricula(string matricula)
+        public int existeMatricula(string tabla, string matricula)
         {
+            string columna = (tabla == "usuario") ? "idUsuario" : "descComputadora";
             int respuesta = ID_USUARIO_INEXISTENTE;
-            string sql = "SELECT * FROM usuario WHERE idUsuario = ";
-            sql += string.Format("'{0}'", matricula);
+            string sql = string.Format("SELECT * FROM {0} WHERE {1} = '{2}' LIMIT 1",
+                                tabla,columna,matricula);
 
             Header();
             try
@@ -86,7 +103,7 @@ namespace ReproductosCliente
 
                 if (reader.HasRows)
                 {
-                    respuesta = ID_USUARIO_EXISTE;
+                    respuesta = ID_USUARIO_EXISTENTE;
                 }
                 reader.Close();
             }
@@ -97,12 +114,12 @@ namespace ReproductosCliente
             return respuesta;
         }
 
-        public Dictionary<string, Object> login(string matricula, string clave)
+        public Dictionary<string, Object> login(string tabla, IConsumidor consumidor)
         {
             string txtAlerta;
             Dictionary<string, Object> mapa = new Dictionary<string, Object>();
 
-            if (existeMatricula(matricula) == 1)
+            if (existeMatricula(tabla, consumidor.getIdUsuario()) == 1)
             {
                 txtAlerta = "La matricula no coincide con la contraseña";
             }
@@ -114,7 +131,8 @@ namespace ReproductosCliente
             }
 
             Header();
-            string sql = string.Format("SELECT * FROM usuario WHERE idUsuario = '{0}' AND claveAcceso = '{1}'", matricula, clave);
+            string sql = string.Format("SELECT * FROM usuario WHERE idUsuario = '{0}' AND claveAcceso = '{1}' LIMIT 1",
+                consumidor.getIdUsuario(), consumidor.getClaveAcceso());
 
             try
             {
@@ -144,11 +162,92 @@ namespace ReproductosCliente
             return mapa;
         }
 
-        public int registrarUsuario(Dictionary<string, Object> mapa)
+        public int registrarEquipo(string tabla, string nombreEquipo)
         {
-            if ( existeMatricula( (string)mapa["idUsuario"] ) == 1)
+            if (existeMatricula(tabla, nombreEquipo) == 1){
+                return ID_EQUIPO_EXISTENTE;
+            }
+
+            string sql = string.Format(
+                "INSERT INTO {0} (descComputadora) VALUES ('{1}')",
+                tabla, nombreEquipo);
+            int respuesta = 0;
+            Header();
+            try
             {
-                return ID_USUARIO_EXISTE;
+                conexionBD.Open();
+                MySqlCommand cmd = new MySqlCommand(sql, conexionBD);
+                respuesta = cmd.ExecuteNonQuery();
+
+                if(respuesta > 0)//salio bien todo
+                {
+                    return respuesta;
+                }
+
+            }catch(MySqlException ex)
+            {
+                new MyMessageBox().Show(ex.ToString());
+            }
+            return respuesta;
+        }
+
+        public int registrarHistorial(string equipo,string matricula,string horaInicio)
+        {
+            string sql = string.Format("INSERT INTO detallecomputadora (idComputadora,idUsuario,horaInicio) " +
+                "SELECT computadora.idComputadora, '{1}', '{2}' FROM computadora " +
+                "WHERE computadora.descComputadora = '{0}'",equipo,matricula,horaInicio);
+            Header();
+
+            try
+            {
+                conexionBD.Open();
+                MySqlCommand cmd = new MySqlCommand(sql, conexionBD);
+
+                if(cmd.ExecuteNonQuery() > 0)
+                {
+                    MySqlCommand cmd2 = new MySqlCommand("SELECT LAST_INSERT_ID()", conexionBD);
+                    object idDetalle = cmd2.ExecuteScalar();
+
+                    return Convert.ToInt32(idDetalle);
+                }
+                conexionBD.Close();
+            }
+            catch(MySqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return REGISTRO_SIN_EXITO;
+        }
+
+        public int updateHistorial(int idDetalle, string horaFinal)
+        {
+            string sql = string.Format("UPDATE detallecomputadora SET horaFinal = '{1}' WHERE idDetalle = {0}",
+                idDetalle, horaFinal);
+            Header();
+
+            try
+            {
+                conexionBD.Open();
+                MySqlCommand cmd = new MySqlCommand(sql, conexionBD);
+
+                if(cmd.ExecuteNonQuery() > 0)
+                {
+                    return UPDATE_EXITO;
+                }
+                conexionBD.Close();
+            }
+            catch(MySqlException ex)
+            {
+                new MyMessageBox().Show(ex.ToString());
+            }
+            return UPDATE_SIN_EXITO;
+        }
+
+        public int registrarUsuario(string tabla,Dictionary<string, Object> mapa)
+        {
+            if ( existeMatricula( tabla,(string)mapa["idUsuario"] ) == 1)
+            {
+                return ID_USUARIO_EXISTENTE;
             }
 
             string sql = "INSERT INTO usuario VALUES (";
@@ -166,7 +265,7 @@ namespace ReproductosCliente
             sql = sql.Substring(0, sql.Length - 2);
             sql += ");";
 
-            Console.WriteLine(sql);
+            //Console.WriteLine(sql);
 
             int respuesta = 0;
             Header();

@@ -93,6 +93,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "FormLogin";
+            this.ShowInTaskbar = false;
             this.Text = "FormLogin";
             this.ResumeLayout(false);
             this.PerformLayout();

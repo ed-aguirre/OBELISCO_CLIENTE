@@ -83,6 +83,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "FormUsoRapido";
+            this.ShowInTaskbar = false;
             this.Text = "FormUsoRapido";
             this.ResumeLayout(false);
             this.PerformLayout();

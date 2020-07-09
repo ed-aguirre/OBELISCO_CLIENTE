@@ -14,7 +14,7 @@ namespace ReproductosCliente
         FormCliente FC;
         FormUsarPC FPC;
         FormUsoRapido FUR;
-        Logica logica = new Logica();
+        Logica logica = Logica.getInstancia();
 
         private const byte REGISTRO_EXITO = 1;
         private const byte REGISTRO_SIN_EXITO = 0;
@@ -30,11 +30,14 @@ namespace ReproductosCliente
         public FormPrincipal()
         {
             InitializeComponent();
+            
+            //crear ip.txt
 
-            logica.setPrgmsEducativos();
             Colorear_panel();
             bloquearForm();
             customDesing(VISTA_ARRANQUE);
+            logica.registrarEquipo();
+            logica.setPrgmsEducativos();
         }
         private void Colorear_panel() //pinta el panel lateral
         {
@@ -42,6 +45,9 @@ namespace ReproductosCliente
             subPanel1.BackColor = ColorTranslator.FromHtml("#005baa");
             subPanel2.BackColor = ColorTranslator.FromHtml("#005baa");
             panel1.BackColor = ColorTranslator.FromHtml("#005baa");
+
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
         }
 
         private void customDesing(int casoInicio)// inicia y setea los valores de los paneles principales
@@ -173,14 +179,14 @@ namespace ReproductosCliente
 
         private void btnUsoRapido_Click(object sender, EventArgs e)
         {
-            FUR = new FormUsoRapido();
+            FUR = new FormUsoRapido( logica.getDatosCliente() );
             abrirChildForm(FUR);
         }
 
         public void bloquearForm() //bloquea el form1 para que el usuario no pueda manipularlo
         { 
             FormBorderStyle = FormBorderStyle.None;
-            TopMost = true;
+            //TopMost = true;
             //ESTA LINEA DE CODIGO ES IMPORTANTE, 
             WindowState = FormWindowState.Maximized;
         }
@@ -211,6 +217,7 @@ namespace ReproductosCliente
         {
             if (logica.cerrarSesion()) //si selecciona si, se cerrará todo los forms y saldra de la sesion
             {
+                logica.updateHistorial();
                 activeForm.Close();
                 cambioMenu();
                 logica.vaciarDatosUsuario();
@@ -223,6 +230,27 @@ namespace ReproductosCliente
                 }
                 bloquearForm();
             }
+        }
+
+        private void FormPrincipal_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            IConsumidor consumidor = Consumidor.FromMap(logica.getDatosCliente());
+
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                return;
+            }
+            if (e.CloseReason == CloseReason.TaskManagerClosing)
+            {
+                if (consumidor.getTipoUsuario() == 1)
+                {
+                    e.Cancel = true;
+                    return;
+                    //e.Cancel = true; //NO SE CIERRA
+                }
+            }
+            
         }
 
     }

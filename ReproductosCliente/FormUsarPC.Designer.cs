@@ -98,6 +98,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "FormUsarPC";
+            this.ShowInTaskbar = false;
             this.Text = "FormUsarPC";
             this.ResumeLayout(false);
             this.PerformLayout();

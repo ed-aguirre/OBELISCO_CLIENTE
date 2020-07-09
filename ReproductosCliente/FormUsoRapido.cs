@@ -12,23 +12,36 @@ namespace ReproductosCliente
 {
     public partial class FormUsoRapido : Form
     {
+        Logica logica = Logica.getInstancia();
+        private Dictionary<string, Object> datosCliente;
+        private const byte DESBLOQUEAR_FORM = 1;
+        private const byte MODO_RAPIDO = 0;
         public FormUsoRapido()
         {
             InitializeComponent();
         }
+        public FormUsoRapido(Dictionary<string, Object> datosUsuario)
+        {
+            InitializeComponent();
+            this.datosCliente = datosUsuario;
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Logica cl = new Logica();
-            if (cl.verificarForm() == true)  //verifica si existe el FormTimer abierto
+            IConsumidor consumidor = Consumidor.FromMap(datosCliente);
+
+            if (logica.verificarForm())  //verifica FormTimer abierto
             {
-                cl.alertaTimerOpen();// alertar que ya esta abierto
+                logica.alertaTimerOpen();
             }
-            else //de lo contrario va iniciar el timer
+            else // inicia el timer
             {
-                this.Close();
-                cl.manipularForm(1); //se miniza todo
-                cl.abrirTimer(0); //se abre el timer
+                if (logica.registrarHistorial(consumidor.getIdUsuario()))
+                {
+                    this.Close();
+                    logica.manipularForm(DESBLOQUEAR_FORM); //se miniza todo
+                    logica.abrirTimer(MODO_RAPIDO, datosCliente); //se abre el timer
+                }
             }
         }
 

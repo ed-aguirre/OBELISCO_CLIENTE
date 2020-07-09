@@ -164,7 +164,7 @@ namespace ReproductosCliente
             }
             else
             {
-                return "0000-00-00";
+                return "9999-01-01";
             }
         }
 

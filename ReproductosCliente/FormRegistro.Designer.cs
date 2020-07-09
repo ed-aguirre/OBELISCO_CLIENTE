@@ -195,6 +195,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Name = "FormRegistro";
+            this.ShowInTaskbar = false;
             this.Text = "FormRegistro";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -50,6 +50,14 @@ namespace ReproductosCliente
                     lblData.Text = "Iniciando sesión...";
                     MostrarBotones(BOTONES_ACEPTAR);
                     break;
+                case 6:
+                    Text = "CERRANDO OBELISCO";
+                    lblData.Text = "ALERTA\n" +
+                        "Cierre de programa inesperado." +
+                        "Se bloqueará tu usuario en el sistema y ya no podras acceder." +
+                        "¿Deseas continuar?";
+                    MostrarBotones(BOTONES_YES_NO);
+                    break;
                 default:
                     Text = "ERROR";
                     lblData.Text = "Al parecer ocurrio un error.";

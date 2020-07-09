@@ -17,19 +17,23 @@ namespace ReproductosCliente
         TextInfo capital = new CultureInfo("en-US", false).TextInfo;
         private Dictionary<string, string> programas;
 
+        private const byte DESBLOQUEAR_FORM = 1;
         public FormCliente()
         {
             InitializeComponent();
+            btnDesbloquear.Visible = false;
         }
 
         public FormCliente(Dictionary<string, Object> datosUser, Dictionary<string, string> programas)
         {
             Console.WriteLine("CLIENTE INICIADA");
             InitializeComponent();
-
+            
+            btnDesbloquear.Visible = false;
             consumidor = Consumidor.FromMap(datosUser);
             this.programas = programas;
             setValores();
+            mostrarBtn();
         }
 
         private void setValores()
@@ -45,6 +49,13 @@ namespace ReproductosCliente
             lblMatricula.Text = consumidor.getIdUsuario();
             lblSaldo.Text = consumidor.getSaldo().ToString();
         }
+        private void mostrarBtn()
+        {
+            if(consumidor.getTipoUsuario() != 1)
+            {
+                btnDesbloquear.Visible = true;
+            }
+        }
 
         private void label2_Click(object sender, EventArgs e)
         {
@@ -54,6 +65,12 @@ namespace ReproductosCliente
         private void FormCliente_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnDesbloquear_Click(object sender, EventArgs e)
+        {
+            Logica logica = Logica.getInstancia();
+            logica.manipularForm(DESBLOQUEAR_FORM);
         }
     }
 }

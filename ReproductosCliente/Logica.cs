@@ -6,24 +6,95 @@ namespace ReproductosCliente
 {
     class Logica 
     {
-        private IConsumidor consumidor;
+        private static Logica logica = null;
+        ConectorBD mysql = ConectorBD.getInstancia();
+
+        
         private Dictionary<string, string> programas;
         private Dictionary<string, Object> datosCliente;
+        private int detalleID;
 
         private const byte DESBLOQUEAR_FORM = 1;
         private const byte CERRAR_SESION = 4;
-        private string ESTADO;
-        private string FECHA ;
+        
+        private readonly string EQUIPO = Environment.MachineName;
+        private const string TABLA = "computadora";
 
-        public Logica()
+        private Logica()
         {
             Console.WriteLine("Logica iniciada");
         }
 
+        public static Logica getInstancia()
+        {
+            if(logica == null)
+            {
+                logica = new Logica();
+            }
+            return logica;
+        }
+
         public void setPrgmsEducativos()
         {
-            this.programas = new ConectorBD().getProgramas();
+            this.programas = mysql.getProgramas();
         }
+
+        public void registrarEquipo()
+        {
+            int respuesta = mysql.existeMatricula(TABLA, EQUIPO);
+            if(respuesta != 1)
+            {
+                int resp2 = mysql.registrarEquipo(TABLA, EQUIPO);
+                if(resp2 == 1)
+                {
+                    string info = string.Format("El equipo: {0} se ha registrado correctamente.", EQUIPO);
+                    new MyMessageBox().Show(info);
+                }
+                else
+                {
+                    new MyMessageBox().Show("Al parecer ocurrio un error al registrar el equipo.");
+                }
+            }
+        }
+
+        public bool registrarHistorial(string matricula)
+        {
+            string hora = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+            int respuesta = mysql.registrarHistorial(EQUIPO, matricula, hora);
+            if(respuesta != 0)
+            {
+                setIdDetalle(respuesta);
+            }
+            else
+            {
+                new MyMessageBox().Show("Ocurrió un problema al intentar registrar el historial.\n" +
+                    "Vuelve a intentarlo más tarde");
+                return false;
+            }
+            return true;
+        }
+
+        public void updateHistorial()
+        {
+            string hora = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+            int respuesta = mysql.updateHistorial(getDetalleId(), hora);
+            if( respuesta != 1)
+            {
+                new MyMessageBox().Show("Se cerró sesión pero ocurrio un problema en el Historial de uso.");
+            }
+
+        }
+
+        public void setIdDetalle(int detalleId)
+        {
+            this.detalleID = detalleId;
+        }
+
+        public int getDetalleId()
+        {
+            return this.detalleID;
+        }
+
         public Dictionary<string,string> getPrgmsEducativo()
         {
             return programas;
@@ -50,6 +121,7 @@ namespace ReproductosCliente
 
         private Boolean ValidarEstadoUsuario(IConsumidor consumidor)
         {
+            string ESTADO;
             if (consumidor.getEstadoUsuario() != 2)
             {
                 ESTADO = Consumidor.nombrarTipoEstado(consumidor.getEstadoUsuario());
@@ -59,15 +131,17 @@ namespace ReproductosCliente
             }
             return false;
         }
+
         private Boolean ValidarFechaExpiracion(IConsumidor consumidor)
         {
             DateTime fechaExp = consumidor.getFechaExpiracion();
             DateTime fechaActual = DateTime.Now;
-
+            string FECHA;
+            
             if ( DateTime.Compare(fechaExp, fechaActual) < 0  )
             {
                 FECHA = "Fecha Expirada";
-                new ConectorBD().updateEstadoUsuario(consumidor.getIdUsuario());
+                mysql.updateEstadoUsuario(consumidor.getIdUsuario());
 
                 new MyMessageBox().
                     Show(FECHA + "\nTu usuario no tiene permitido entrar al sistema.");
@@ -92,7 +166,7 @@ namespace ReproductosCliente
             else
             {
                 fc[0].FormBorderStyle = FormBorderStyle.None; //hago el form principal no sea manejable
-                fc[0].TopMost = true; // lo pongo en el top
+                //fc[0].TopMost = true; // lo pongo en el top
                 fc[0].WindowState = FormWindowState.Maximized; //y se maximiza
             }
 
@@ -112,7 +186,7 @@ namespace ReproductosCliente
                 if(result == DialogResult.OK)
                 {
                     consumidor.setSaldo(nuevoSaldo);
-                    int respuesta = new ConectorBD().updateSaldo(nuevoSaldo,consumidor.getIdUsuario());
+                    int respuesta = mysql.updateSaldo(nuevoSaldo,consumidor.getIdUsuario());
                     if(respuesta == 1)
                     {
                         return true;
@@ -143,7 +217,7 @@ namespace ReproductosCliente
 
         public void vaciarDatosUsuario()
         {
-            this.consumidor = null;
+            //this.consumidor = null;
             this.datosCliente.Clear();
         }
 
@@ -152,9 +226,9 @@ namespace ReproductosCliente
             new MyMessageBox().Show("Ya se ha iniciado el cronometro.");
         }
 
-        public void abrirTimer(int tipo) //recibe un entero que sera el tipo de tiemr (1= 3 horas, 0= 3minutos)
+        public void abrirTimer(int tipo, Dictionary<string,Object> datos ) //recibe un entero que sera el tipo de tiemr (1= 3 horas, 0= 3minutos)
         {
-            FormTimer time = new FormTimer(tipo);
+            FormTimer time = new FormTimer(tipo, datos);
             time.Show();
         }
 
@@ -163,7 +237,6 @@ namespace ReproductosCliente
             bool existe = false;
             foreach(Form frm in Application.OpenForms)
             {
-                
                 if(frm.Name.Equals("FormTimer"))
                 {
                     existe = true;

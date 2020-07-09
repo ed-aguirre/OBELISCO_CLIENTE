@@ -19,7 +19,9 @@ namespace ReproductosCliente
         private IConsumidor consumidor = new Consumidor();
         private Regex regex = new Regex("^(ZS+[0-9]{8}$|^[0-9]{5,7}$)");
         Dictionary<string, string> programas;
-        
+        ConectorBD mysql = ConectorBD.getInstancia();
+
+        private string tabla = "usuario";
         private string programaEducativo;
         private string txtAlerta;
         private const int ID_EXISTENTE = 1;
@@ -112,6 +114,9 @@ namespace ReproductosCliente
 
         public void setCampos()
         {
+            string date = Consumidor.calcularFecha(inputMatricula.Text.ToUpper());
+            var dateTime = DateTime.ParseExact(date, "yyyy-MM-dd", null);
+
             consumidor.setIdUsuario(inputMatricula.Text.ToUpper());
             consumidor.setClaveAcceso(inputContra.Text);
             consumidor.setApellidoMaterno(inputApellidoMaterno.Text.ToUpper());
@@ -121,15 +126,14 @@ namespace ReproductosCliente
             consumidor.setPrgmaEducativo(int.Parse(programaEducativo));
             consumidor.setSaldo();
             consumidor.setEstadoUsuario();
-            DateTime date = Convert.ToDateTime(Consumidor.calcularFecha(inputMatricula.Text.ToUpper()));
-            consumidor.setFechaExpiracion( date );
+            consumidor.setFechaExpiracion( dateTime ) ;
 
             //Console.WriteLine(consumidor.getString());
         }
 
         public int EnviarDatosUsuario()
         {
-            int respuesta = new ConectorBD().existeMatricula(consumidor.getIdUsuario() );
+            int respuesta = mysql.existeMatricula(tabla,consumidor.getIdUsuario() );
             if ( respuesta == ID_EXISTENTE)
             {
                 txtAlerta = "La matricula ingresada ya existe.";
@@ -137,7 +141,7 @@ namespace ReproductosCliente
             }
             else
             {
-                return new ConectorBD().registrarUsuario( Consumidor.toMap(consumidor) );
+                return mysql.registrarUsuario( tabla, Consumidor.toMap(consumidor) );
             }
             return 0;
         }

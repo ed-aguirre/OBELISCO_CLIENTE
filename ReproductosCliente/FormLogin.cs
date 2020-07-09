@@ -7,6 +7,8 @@ namespace ReproductosCliente
     public partial class FormLogin : Form
     {
         private string txtAlerta= "";
+        private string tabla = "usuario";
+        ConectorBD mysql = ConectorBD.getInstancia();
         
         public FormLogin()
         {
@@ -21,11 +23,12 @@ namespace ReproductosCliente
 
         public Dictionary<string,Object> iniciarSesion()
         {
+            IConsumidor cliente = new Consumidor();
             Dictionary<string, Object> dataUser;
-            string matricula = inputMatricula.Text.ToUpper();
-            string clave = inputClaveAcceso.Text.ToUpper();
+            cliente.setIdUsuario(inputMatricula.Text.ToUpper()) ;
+            cliente.setClaveAcceso(inputClaveAcceso.Text.ToUpper());
 
-            dataUser = new ConectorBD().login(matricula, clave);
+            dataUser = mysql.login(tabla, cliente);
             
             return dataUser;
         }

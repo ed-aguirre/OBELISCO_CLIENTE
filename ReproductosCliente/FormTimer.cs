@@ -12,7 +12,8 @@ namespace ReproductosCliente
 {
     public partial class FormTimer : Form
     {
-        Logica logica;
+        Logica logica = Logica.getInstancia();
+        private IConsumidor consumidor;
         private int segundos = 60;
         private int minutos = 0;
         private int horas = 0;
@@ -24,9 +25,11 @@ namespace ReproductosCliente
         private const byte BLOQUEAR_FORM = 0;
         private const byte ALERTA_MODO_RAPIDO = 3;
         private const byte ALERTA_MODO_USAR_PC = 2;
-        public FormTimer(int modo)
+        public FormTimer(int modo, Dictionary<string, Object> datosCliente)
         {
+            this.consumidor = Consumidor.FromMap(datosCliente);
             InitializeComponent();
+
             FormBorderStyle = FormBorderStyle.FixedToolWindow; // este es una ventanita pero se puede cerrar
             TopMost = true;
             this.ControlBox = false;
@@ -91,8 +94,8 @@ namespace ReproductosCliente
 
         private void tiempoAgotado(int modo)
         {
-            logica = new Logica();
-            if(modo == MODO_RAPIDO) // el tiempo rapido, Salir del programa
+
+            if (modo == MODO_RAPIDO) // el tiempo rapido, Salir del programa
             {
                 logica.manipularForm(BLOQUEAR_FORM);
                 //maximiza y bloquea. siento que necesito acceder al bloqeuar form directo del principal
@@ -142,6 +145,20 @@ namespace ReproductosCliente
 
         private void FormTimer_FormClosing(object sender, FormClosingEventArgs e)
         {
+            /*if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                return;
+            }
+            if (e.CloseReason == CloseReason.TaskManagerClosing)
+            {
+                if (consumidor.getTipoUsuario() == 1)
+                {
+                    e.Cancel = true;
+                    return;
+                    //e.Cancel = true; //NO SE CIERRA
+                }
+            }*/
             tmr.Enabled = false;
         }
 

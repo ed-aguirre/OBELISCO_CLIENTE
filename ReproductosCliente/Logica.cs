@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 
 namespace ReproductosCliente
@@ -8,13 +9,14 @@ namespace ReproductosCliente
     {
         private static Logica logica = null;
         ConectorBD mysql = ConectorBD.getInstancia();
-
+        FormConfig config;
         
         private Dictionary<string, string> programas;
         private Dictionary<string, Object> datosCliente;
         private int detalleID;
 
         private const byte DESBLOQUEAR_FORM = 1;
+        private const byte BLOQUEAR_FORM = 0;
         private const byte CERRAR_SESION = 4;
         
         private readonly string EQUIPO = Environment.MachineName;
@@ -57,6 +59,30 @@ namespace ReproductosCliente
             }
         }
 
+        public void setHeader( Dictionary<string,string> mapa)
+        {
+            StreamWriter agregar = File.AppendText("config.txt");
+
+            foreach (KeyValuePair<string, string> entry in mapa)
+            {
+                agregar.WriteLine(entry.Key + " " + entry.Value);
+            }
+
+            agregar.Close();
+            new MyMessageBox().Show("Config.txt modificada con exito!");
+            conectarBD();
+        }
+
+        public void conectarBD()
+        {
+            if( mysql.Conectar())
+            {
+                setPrgmsEducativos();
+                registrarEquipo();
+                //manipularForm(BLOQUEAR_FORM);
+            }
+        }
+
         public bool registrarHistorial(string matricula)
         {
             string hora = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
@@ -80,7 +106,7 @@ namespace ReproductosCliente
             int respuesta = mysql.updateHistorial(getDetalleId(), hora);
             if( respuesta != 1)
             {
-                new MyMessageBox().Show("Se cerró sesión pero ocurrio un problema en el Historial de uso.");
+                new MyMessageBox().Show("Se cerró sesión correctamente.\nNo se actualizó el Historial de uso.");
             }
 
         }

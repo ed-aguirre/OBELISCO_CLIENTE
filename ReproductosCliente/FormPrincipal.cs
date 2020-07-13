@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace ReproductosCliente
@@ -30,14 +31,28 @@ namespace ReproductosCliente
         public FormPrincipal()
         {
             InitializeComponent();
-            
-            //crear ip.txt
+            WindowState = FormWindowState.Maximized;
 
             Colorear_panel();
-            bloquearForm();
             customDesing(VISTA_ARRANQUE);
-            logica.registrarEquipo();
-            logica.setPrgmsEducativos();
+            inicio();
+            
+        }
+
+        private void inicio()
+        {
+            if( !File.Exists("config.txt"))
+            {
+                new MyMessageBox().Show("Es la primera vez que se inicia el programa en este equipo.\n" +
+                    "Iniciando proceso de configuracion.");
+                FormConfig config = new FormConfig();
+                config.Show();
+            }
+            else
+            {
+                bloquearForm();
+                logica.conectarBD();
+            }
         }
         private void Colorear_panel() //pinta el panel lateral
         {
@@ -188,7 +203,7 @@ namespace ReproductosCliente
             FormBorderStyle = FormBorderStyle.None;
             //TopMost = true;
             //ESTA LINEA DE CODIGO ES IMPORTANTE, 
-            WindowState = FormWindowState.Maximized;
+            
         }
 
 

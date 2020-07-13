@@ -16,9 +16,8 @@ namespace ReproductosCliente
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            AppDomain.CurrentDomain.ProcessExit += AlertaCerrar;
             Application.Run(new FormPrincipal());
-
+                
         }
         static void AlertaCerrar(object sender, EventArgs e)
         {

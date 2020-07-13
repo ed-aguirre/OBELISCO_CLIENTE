@@ -7,18 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace ReproductosCliente
 {
     class ConectorBD
     {
         private static ConectorBD mysql = null;
-        string servidor = "localhost";
-        string puerto = "3306";
-        string usuario = "root";
-        string pass = "";
-        string bd = "ccomputo";
-
+        string servidor = "";//localhost
+        string puerto = "";//3306
+        string usuario = "";//root
+        string pass = "";//
+        string bd = "";//ccomputo
+        
         const byte ID_USUARIO_EXISTENTE = 1;
         const byte ID_USUARIO_INEXISTENTE = 0;
 
@@ -46,6 +47,29 @@ namespace ReproductosCliente
             }
             return mysql;
         }
+
+        public void setHeader()
+        {
+            string[] header;
+            string s;
+            Dictionary<string, string> mapa = new Dictionary<string, string>();
+
+            StreamReader sr = File.OpenText("config.txt");
+            while( (s = sr.ReadLine()) != null)
+            {
+                header = s.Split(' ');
+                mapa.Add(header[0], header[1]);
+            }
+            sr.Close();
+
+            servidor = mapa["servidor"];
+            puerto =   mapa["puertoMysql"];
+            usuario =  mapa["usuario"];
+            pass =     mapa["contra"];
+            bd =       mapa["nombreBD"];
+            //Falta el socket.setPuerto( mapa["servidor"],mapa["puertoSocket"] )
+        }
+
         public void Header()
         {
             string cadenaCon = "server=" + servidor + "; port=" + puerto + "; user=" + usuario
@@ -77,6 +101,7 @@ namespace ReproductosCliente
                     
                 }
                 reader.Close();
+                conexionBD.Close();
             }
             catch(MySqlException ex)
             {
@@ -106,6 +131,7 @@ namespace ReproductosCliente
                     respuesta = ID_USUARIO_EXISTENTE;
                 }
                 reader.Close();
+                conexionBD.Close();
             }
             catch(MySqlException ex)
             {
@@ -154,6 +180,7 @@ namespace ReproductosCliente
                     new MyMessageBox().Show(txtAlerta);
                 }
                 reader.Close();
+                conexionBD.Close();
             }
             catch (MySqlException ex)
             {
@@ -183,8 +210,9 @@ namespace ReproductosCliente
                 {
                     return respuesta;
                 }
-
-            }catch(MySqlException ex)
+                conexionBD.Close();
+            }
+            catch(MySqlException ex)
             {
                 new MyMessageBox().Show(ex.ToString());
             }
@@ -280,7 +308,7 @@ namespace ReproductosCliente
                 {
                     return respuesta;
                 }
-                
+                conexionBD.Close();
             }
             catch(MySqlException ex)
             {
@@ -307,8 +335,9 @@ namespace ReproductosCliente
                 {
                     return respuesta;
                 }
-
-            }catch(MySqlException ex)
+                conexionBD.Close();
+            }
+            catch(MySqlException ex)
             {
                 MessageBox.Show(ex.ToString());
             }
@@ -332,16 +361,20 @@ namespace ReproductosCliente
                 {
                     return UPDATE_EXITO;
                 }
-            }catch(MySqlException ex)
+                conexionBD.Close();
+            }
+            catch(MySqlException ex)
             {
                 MessageBox.Show(ex.ToString());
             }
             return UPDATE_SIN_EXITO;
         }
 
-        public void Conectar()
+        public bool Conectar()
         {
+            setHeader();
             Header();
+            bool respuesta = false;
             try
             {
                 conexionBD.Open();
@@ -350,18 +383,19 @@ namespace ReproductosCliente
                 MySqlCommand cmd = new MySqlCommand("show tables", conexionBD); //se envia la consulta
                 reader = cmd.ExecuteReader(); //se ejecuta la consulta y se guarda en la variable
 
-                while( reader.Read())
+                if( reader.Read())
                 {
-                    Console.WriteLine(reader.GetString(0) + "\n");//se le pone cero por que queremos el dato de la posicion cero
-
+                    Console.WriteLine("CONEXION A BD CORRECTA");
+                    respuesta = true;
                 }
+                conexionBD.Close();
+                return respuesta;
             }
             catch( MySqlException ex)
             {
                 MessageBox.Show(ex.ToString());
             }
-
-            //MessageBox.Show(datos);
+            return respuesta;
         }
     }
 }

@@ -31,3 +31,4 @@ C:\Users\luis2\source\repos\ReproductosCliente\ReproductosCliente\obj\Debug\Repr
 C:\Users\luis2\source\repos\ReproductosCliente\ReproductosCliente\obj\Debug\ReproductosCliente.csproj.CopyComplete
 C:\Users\luis2\source\repos\ReproductosCliente\ReproductosCliente\obj\Debug\ReproductosCliente.FormPrincipal.resources
 C:\Users\luis2\source\repos\ReproductosCliente\ReproductosCliente\obj\Debug\ReproductosCliente.MyMessageBox.resources
+C:\Users\luis2\source\repos\ReproductosCliente\ReproductosCliente\obj\Debug\ReproductosCliente.FormConfig.resources

@@ -1,0 +1,6 @@
+servidor 127.0.0.1
+puertoMysql 3306
+usuario CLIENTE
+contra UVCLIENTE
+nombreBD ccomputo
+puertoSocket 0001

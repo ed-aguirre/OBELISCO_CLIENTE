@@ -1,7 +1,6 @@
 C:\Users\luis2\source\repos\ReproductosCliente\ReproductosCliente\bin\Debug\ReproductosCliente.exe.config
 C:\Users\luis2\source\repos\ReproductosCliente\ReproductosCliente\bin\Debug\ReproductosCliente.exe
 C:\Users\luis2\source\repos\ReproductosCliente\ReproductosCliente\bin\Debug\ReproductosCliente.pdb
-C:\Users\luis2\source\repos\ReproductosCliente\ReproductosCliente\obj\Debug\ReproductosCliente.csprojAssemblyReference.cache
 C:\Users\luis2\source\repos\ReproductosCliente\ReproductosCliente\obj\Debug\ReproductosCliente.Properties.Resources.resources
 C:\Users\luis2\source\repos\ReproductosCliente\ReproductosCliente\obj\Debug\ReproductosCliente.csproj.GenerateResource.cache
 C:\Users\luis2\source\repos\ReproductosCliente\ReproductosCliente\obj\Debug\ReproductosCliente.csproj.CoreCompileInputs.cache

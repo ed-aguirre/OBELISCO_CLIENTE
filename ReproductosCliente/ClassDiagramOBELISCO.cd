@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ReproductosCliente.Consumidor">
+    <Position X="0.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>gCACAAEAMCAFAAQBASAICIBAACACAgQIQAMAEgAiAGA=</HashCode>
+      <FileName>Cliente\Consumidor.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ReproductosCliente.Logica">
+    <Position X="7.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>QAIQAA4kIABEAQAAAAAAMIAAQAUABgBkBEAKQAAgQIw=</HashCode>
+      <FileName>Cliente\Logica.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ReproductosCliente.ConectorBD">
+    <Position X="5.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAIACAAoEmAEAAAAAAAAAAQQVgTEAIIAYAgQEAA=</HashCode>
+      <FileName>DBManager\ConectorBD.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ReproductosCliente.FormCliente">
+    <Position X="9.75" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAQgACCAQBAAAACAAQAKCQgACBBAAAIAEQBAAAA=</HashCode>
+      <FileName>Forms\FormCliente.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ReproductosCliente.FormConfig">
+    <Position X="12" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AQCAAAAgQCIIAAAAAACBEAACIUCBAAgBAAAAAASwICA=</HashCode>
+      <FileName>Forms\FormConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ReproductosCliente.FormLogin">
+    <Position X="3.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAQAQCEAABAAAACAAAACAAAAAgAAAAQAAAAAIAA=</HashCode>
+      <FileName>Forms\FormLogin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ReproductosCliente.FormPrincipal">
+    <Position X="14.25" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>NRBAAAAAQSCBAQHAABCBoZQSiAAAHQDAgABAJQBoAAA=</HashCode>
+      <FileName>Forms\FormPrincipal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ReproductosCliente.FormRegistro">
+    <Position X="17" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>IBKAAAxgQCAgALBAAASCAAASAAAQCgAAACRQAAAAIAA=</HashCode>
+      <FileName>Forms\FormRegistro.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ReproductosCliente.FormTimer">
+    <Position X="19" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>ASAAAAQQgCDAARABCACAAAAHABABCAQAgAAAAAIpAIA=</HashCode>
+      <FileName>Forms\FormTimer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ReproductosCliente.FormUsarPC">
+    <Position X="21.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>CAAQAAQAACAAABAAAACAAAACAAAAAAAABAQAAAAkAAA=</HashCode>
+      <FileName>Forms\FormUsarPC.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ReproductosCliente.FormUsoRapido">
+    <Position X="24" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAQQACAAABAAAACAAAACAAAIAAAABEAAAAAgAAA=</HashCode>
+      <FileName>Forms\FormUsoRapido.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ReproductosCliente.MyMessageBox">
+    <Position X="26.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAACKQAAAgABACAAAASAECEAEAAAAAAAQAAAAA=</HashCode>
+      <FileName>Forms\MyMessageBox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="ReproductosCliente.IConsumidor">
+    <Position X="3.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>CQggAgAAACAgBIACAAAAgACIAAQgAAAAAAIAQAAAEIA=</HashCode>
+      <FileName>Interfaces\IConsumidor.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

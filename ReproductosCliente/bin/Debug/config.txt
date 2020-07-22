@@ -3,4 +3,4 @@ puertoMysql 3306
 usuario CLIENTE
 contra UVCLIENTE
 nombreBD ccomputo
-puertoSocket 0001
+puertoSocket 4404

@@ -17,7 +17,7 @@ namespace ReproductosCliente
     public partial class FormRegistro : Form
     {
         private IConsumidor consumidor = new Consumidor();
-        private Regex regex = new Regex("^(ZS+[0-9]{8}$|^[0-9]{5,7}$)");
+        private Regex regex = new Regex("^(ZS+[0-9]{8}$|^[0-9]{4,5}$)");
         Dictionary<string, string> programas;
         ConectorBD mysql = ConectorBD.getInstancia();
 
@@ -97,7 +97,7 @@ namespace ReproductosCliente
             {
                 txtAlerta = "Ingresa tu matricula o N° Personal Academico\n" +
                     "Matricula Estudiante: Incluir la Z al principio.\n" +
-                    "N° Personal: Debe poseer entre 5 y 7 caracteres. ";
+                    "N° Personal: Debe poseer entre 4 y 5 caracteres. ";
                 new MyMessageBox().Show(txtAlerta);
                 inputMatricula.Focus();
                 return false;
